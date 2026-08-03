@@ -77,36 +77,88 @@ canvas{display:block}
 
 <!-- ========== DADOS ========== -->
 <script>
-const ATU = '3 Ago 2026 · 12h35 · MLB apenas';
+const ATU = '3 Ago 2026 · 12h38 · MLB apenas';
 
 const DAILY = [
-  { dia:'—', env:0, res:0, csat:null, taxa:0 }
+  { dia:'01/Ago', env:4, res:0, csat:null, taxa:0.0 },
+  { dia:'02/Ago', env:4, res:0, csat:null, taxa:0.0 },
+  { dia:'03/Ago', env:308, res:27, csat:63.0, taxa:8.8 }
 ];
 
-const SCORES = [0, 0, 0, 0, 0]; // n1..n5
+const SCORES = [7, 3, 0, 1, 16]; // n1..n5
 
 const CANAL = [
-  { lbl:'sem dados', res:0, csat:null, n:[0,0,0,0,0] }
+  { lbl:'C2C · Expert', res:9, csat:66.7, n:[1,2,0,0,6] },
+  { lbl:'CHAT · Expert', res:17, csat:64.7, n:[6,0,0,1,10] },
+  { lbl:'CHAT · Newbie', res:1, csat:0.0, n:[0,1,0,0,0] }
 ];
 
 const PROCESSO = [
-  { proc:'sem dados', res:0, csat:null }
+  { proc:'ReputaciÃ³n', res:16, csat:50.0 },
+  { proc:'PR - Propiedad intelectual', res:2, csat:50.0 },
+  { proc:'ReputaciÃ³n ME', res:6, csat:83.3 },
+  { proc:'GestiÃ³n de PublicaciÃ³n', res:1, csat:100.0 },
+  { proc:'PR - TÃ©cnica prohibida', res:1, csat:100.0 },
+  { proc:'Post Compra Funcionalidades Vendedor', res:1, csat:100.0 }
 ];
 
 const SOLUCOES = [
-  { proc:'sem dados', sol:'—', res:0, csat:null }
+  { proc:'GestiÃ³n de PublicaciÃ³n', sol:'Modificar - PublicÃ³ en catÃ¡logo un producto diferente a lo', res:1, csat:100.0 },
+  { proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Quitamos la moderaciÃ³n para reactiv', res:1, csat:0.0 },
+  { proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Aprobamos factura y reactivamos la p', res:1, csat:100.0 },
+  { proc:'PR - TÃ©cnica prohibida', sol:'TÃ©cnica prohibida - Rollback (reactivamos publicaciÃ³n)', res:1, csat:100.0 },
+  { proc:'Post Compra Funcionalidades Vendedor', sol:'Error en la mediaciÃ³n - Derivamos a MED', res:1, csat:100.0 },
+  { proc:'ReputaciÃ³n', sol:'Experiencia de compra - Status de la publicaciÃ³n', res:1, csat:0.0 },
+  { proc:'ReputaciÃ³n', sol:'Criterios reputaciÃ³n - CÃ³mo funciona la reputaciÃ³n', res:1, csat:0.0 },
+  { proc:'ReputaciÃ³n', sol:'Analizamos reputaciÃ³n - Reclamo afecta la reputaciÃ³n por p', res:1, csat:0.0 },
+  { proc:'ReputaciÃ³n', sol:'Analizamos reputaciÃ³n - Reclamo afecta la reputaciÃ³n por p', res:1, csat:0.0 },
+  { proc:'ReputaciÃ³n', sol:'Analizamos reputaciÃ³n - CancelaciÃ³n afecta la reputaciÃ³n ', res:1, csat:0.0 },
+  { proc:'ReputaciÃ³n', sol:'Analizamos reputaciÃ³n - Reclamo revisado', res:2, csat:50.0 },
+  { proc:'ReputaciÃ³n', sol:'Analizamos reputaciÃ³n - Reclamo afecta la reputaciÃ³n y exc', res:8, csat:87.5 },
+  { proc:'ReputaciÃ³n ME', sol:'ReputaciÃ³n ME Colecta XD: colecta pendiente', res:1, csat:0.0 },
+  { proc:'ReputaciÃ³n ME', sol:'ReputaciÃ³n ME Ventas: LogÃ­stica Cross Docking - Excluimos', res:1, csat:100.0 },
+  { proc:'ReputaciÃ³n ME', sol:'ReputaciÃ³n ME Ventas: EnvÃ­o no afecta al HT', res:1, csat:100.0 },
+  { proc:'ReputaciÃ³n ME', sol:'ReputaciÃ³n ME Ventas: LogÃ­stica Places - Excluimos', res:1, csat:100.0 },
+  { proc:'ReputaciÃ³n ME', sol:'ReputaciÃ³n: Consulta por HT sÃ¡bados y feriados (V)', res:1, csat:100.0 },
+  { proc:'ReputaciÃ³n ME', sol:'ReputaciÃ³n ME Ventas: LogÃ­stica Flex - Excluimos', res:1, csat:100.0 }
 ];
 
 const TLS = [
-  { tl:'sem dados', nome:'—', res:0, csat:null, dets:0 }
+  { tl:'thaidossanto', nome:'Thais', res:8, csat:37.5, dets:5 },
+  { tl:'lrossetto', nome:'Letícia', res:2, csat:50.0, dets:1 },
+  { tl:'alicarvalho', nome:'Aline', res:7, csat:71.4, dets:2 },
+  { tl:'imsilva', nome:'Ivan', res:7, csat:71.4, dets:2 },
+  { tl:'isabmot', nome:'Isabela', res:3, csat:100.0, dets:0 }
 ];
 
 const AGENTES = [
-  { ldap:'sem dados', tl:'—', km:'—', res:0, csat:null, sc:null, dets:0 }
+  { ldap:'casbarreiros', tl:'thaidossanto', km:'EXPERT', res:3, csat:0.0, sc:1.0, dets:3 },
+  { ldap:'linessousa', tl:'imsilva', km:'EXPERT', res:1, csat:0.0, sc:2.0, dets:1 },
+  { ldap:'cafarias', tl:'alicarvalho', km:'EXPERT', res:1, csat:0.0, sc:1.0, dets:1 },
+  { ldap:'csnunes', tl:'lrossetto', km:'EXPERT', res:1, csat:0.0, sc:2.0, dets:1 },
+  { ldap:'amcaldeira', tl:'thaidossanto', km:'EXPERT', res:1, csat:0.0, sc:1.0, dets:1 },
+  { ldap:'gabrielaaiol', tl:'imsilva', km:'EXPERT', res:1, csat:0.0, sc:1.0, dets:1 },
+  { ldap:'vfarias', tl:'alicarvalho', km:'EXPERT', res:1, csat:0.0, sc:1.0, dets:1 },
+  { ldap:'eduejesus', tl:'thaidossanto', km:'NEWBIE', res:1, csat:0.0, sc:2.0, dets:1 },
+  { ldap:'marlaraujo', tl:'alicarvalho', km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'kperrone', tl:'thaidossanto', km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'vitnasciment', tl:'imsilva', km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'bcunha', tl:'alicarvalho', km:'EXPERT', res:2, csat:100.0, sc:4.5, dets:0 },
+  { ldap:'vltrevizan', tl:'imsilva', km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'marguedes', tl:'alicarvalho', km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'vfonorio', tl:'isabmot', km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'adysantos', tl:'lrossetto', km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'pmarinho', tl:'imsilva', km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'renataperei', tl:'isabmot', km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'ulissouza', tl:'thaidossanto', km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'mrmarques', tl:'isabmot', km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 }
 ];
 
 const INTRA_TODAY = [
-  { h:'—', res:0, csat:null, det:0 }
+  { h:'07h', res:5, csat:80.0, det:1 },
+  { h:'08h', res:8, csat:50.0, det:4 },
+  { h:'09h', res:3, csat:66.7, det:1 },
+  { h:'10h', res:11, csat:63.6, det:4 }
 ];
 
 function pct(v){ return v!=null ? v.toFixed(1)+'%' : '—' }
