@@ -347,6 +347,7 @@ function csatTxt(v){   return v>=80?'#173404':v>=60?'#633806':'#4A1B0C' }
   <div class="header-right">
     <div class="badge pulse-wrap"><span class="pulse"></span>NRT ~30min</div>
     <div class="badge warn">⚠ Sem target até out/2026</div>
+    <div class="badge" id="refresh-countdown" style="background:#26215C;color:#9FE1CB;min-width:80px;text-align:center">↻ —</div>
     <div class="badge" id="atu-badge"></div>
   </div>
 </div>
@@ -392,6 +393,7 @@ function csatTxt(v){   return v>=80?'#173404':v>=60?'#633806':'#4A1B0C' }
   <div class="tab" onclick="setTab(4)">🧑 Agentes</div>
   <div class="tab" onclick="setTab(5)">⚡ Intradiário</div>
   <div class="tab" onclick="setTab(6)">🚨 Detratores</div>
+  <div id="btn-all" onclick="toggleAll()" style="margin-left:auto;padding:12px 16px;font-size:12px;font-weight:700;color:#888780;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:color .15s" onmouseover="this.style.color='#412402'" onmouseout="this.style.color=this.classList.contains('active')?'#412402':'#888780'">⊞ Ver tudo</div>
 </div>
 
 <!-- TAB 0 — VISÃO GERAL -->
@@ -595,10 +597,29 @@ function csatTxt(v){   return v>=80?'#173404':v>=60?'#633806':'#4A1B0C' }
 document.getElementById('atu-badge').textContent = 'Atualizado: '+ATU;
 
 let chartsInited = {};
+let allMode = false;
 function setTab(i){
+  allMode = false;
+  document.querySelectorAll('.panel').forEach(p=>{ p.style.display=''; p.classList.remove('active'); });
   document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('active',i===j));
-  document.querySelectorAll('.panel').forEach((p,j)=>p.classList.toggle('active',i===j));
+  document.querySelectorAll('.panel')[i].classList.add('active');
   if(!chartsInited[i]){ renderTab(i); chartsInited[i]=true; }
+  sessionStorage.setItem('csat_tab', i);
+  const btn = document.getElementById('btn-all');
+  if(btn){ btn.textContent='⊞ Ver tudo'; btn.classList.remove('active'); }
+}
+function toggleAll(){
+  allMode = !allMode;
+  const btn = document.getElementById('btn-all');
+  if(allMode){
+    for(let i=0;i<7;i++){ if(!chartsInited[i]){ renderTab(i); chartsInited[i]=true; } }
+    document.querySelectorAll('.panel').forEach(p=>{ p.style.display='block'; });
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    btn.textContent='⊟ Fechar'; btn.classList.add('active');
+  } else {
+    document.querySelectorAll('.panel').forEach(p=>{ p.style.display=''; });
+    setTab(parseInt(sessionStorage.getItem('csat_tab')||'0'));
+  }
 }
 function renderTab(i){
   if(i===0) renderVisaoGeral();
@@ -1057,6 +1078,21 @@ function renderDetratores(){
 
 chartsInited[0]=true;
 renderVisaoGeral();
+
+// Restaurar aba da sessão anterior
+const _savedTab = parseInt(sessionStorage.getItem('csat_tab')||'0');
+if(_savedTab > 0) setTab(_savedTab);
+
+// Countdown + auto-reload a cada 30min
+const _reloadAt = Date.now() + 30*60*1000;
+setInterval(()=>{
+  const rem = _reloadAt - Date.now();
+  if(rem <= 0){ location.reload(); return; }
+  const m = Math.floor(rem/60000);
+  const s = Math.floor((rem%60000)/1000);
+  const el = document.getElementById('refresh-countdown');
+  if(el) el.textContent = `↻ ${m}:${s.toString().padStart(2,'0')}`;
+}, 1000);
 </script>
 </body>
 </html>
