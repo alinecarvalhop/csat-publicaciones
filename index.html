@@ -77,70 +77,36 @@ canvas{display:block}
 
 <!-- ========== DADOS ========== -->
 <script>
-const ATU = '3 ago 2026 · 09h · MLB apenas';
+const ATU = '3 Ago 2026 · 12h30 · MLB apenas';
 
 const DAILY = [
-  { dia:'01/Ago', env:4,   res:0,  csat:null, taxa:0.0  },
-  { dia:'02/Ago', env:4,   res:0,  csat:null, taxa:0.0  },
-  { dia:'03/Ago', env:216, res:15, csat:60.0, taxa:6.9  },
+  { dia:'—', env:0, res:0, csat:null, taxa:0 }
 ];
 
-const SCORES = [4, 2, 0, 0, 9]; // n1..n5
+const SCORES = [0, 0, 0, 0, 0]; // n1..n5
 
 const CANAL = [
-  { lbl:'C2C · Expert',   res:7, csat:71.4, n:[1,1,0,0,5] },
-  { lbl:'CHAT · Expert',  res:7, csat:57.1, n:[3,0,0,0,4] },
-  { lbl:'CHAT · Newbie',  res:1, csat:0.0,  n:[0,1,0,0,0] },
+  { lbl:'sem dados', res:0, csat:null, n:[0,0,0,0,0] }
 ];
 
 const PROCESSO = [
-  { proc:'Reputación',                        res:7, csat:42.9 },
-  { proc:'PR - Propiedad intelectual',        res:2, csat:50.0 },
-  { proc:'Reputación ME',                     res:4, csat:75.0 },
-  { proc:'Gestión de Publicación',            res:1, csat:100.0 },
-  { proc:'Post Compra Func. Vendedor',        res:1, csat:100.0 },
+  { proc:'sem dados', res:0, csat:null }
 ];
 
 const SOLUCOES = [
-  { proc:'Reputación', sol:'Reclamo revisado',                res:1, csat:0.0   },
-  { proc:'Reputación', sol:'Cancelación afecta — mantenemos', res:1, csat:0.0   },
-  { proc:'Reputación', sol:'Cómo funciona la reputación',     res:1, csat:0.0   },
-  { proc:'Reputación', sol:'Reclamo afecta — excluimos',      res:4, csat:75.0  },
-  { proc:'PR - Propiedad intelectual', sol:'Quitamos moderación (Rollback)', res:1, csat:0.0   },
-  { proc:'PR - Propiedad intelectual', sol:'Aprobamos factura y reactivamos',res:1, csat:100.0 },
-  { proc:'Reputación ME', sol:'Colecta XD pendiente',          res:1, csat:0.0   },
-  { proc:'Reputación ME', sol:'Logística Places — excluimos',  res:1, csat:100.0 },
-  { proc:'Reputación ME', sol:'Consulta HT sábados/feriados',  res:1, csat:100.0 },
-  { proc:'Reputación ME', sol:'Envío no afecta HT',            res:1, csat:100.0 },
-  { proc:'Gestión de Publicación', sol:'Publicó en catálogo — producto diferente', res:1, csat:100.0 },
-  { proc:'Post Compra Func. Vendedor', sol:'Error mediación — derivamos MED', res:1, csat:100.0 },
+  { proc:'sem dados', sol:'—', res:0, csat:null }
 ];
 
 const TLS = [
-  { tl:'thaidossanto', nome:'Thais',  res:5, csat:40.0, dets:3 },
-  { tl:'alicarvalho',  nome:'Aline',  res:3, csat:66.7, dets:1 },
-  { tl:'imsilva',      nome:'Ivan',   res:7, csat:71.4, dets:2 },
+  { tl:'sem dados', nome:'—', res:0, csat:null, dets:0 }
 ];
 
 const AGENTES = [
-  { ldap:'linessousa',   tl:'imsilva',      km:'EXPERT', res:1, csat:0.0,   sc:2.0, dets:1 },
-  { ldap:'vfarias',      tl:'alicarvalho',  km:'EXPERT', res:1, csat:0.0,   sc:1.0, dets:1 },
-  { ldap:'casbarreiros', tl:'thaidossanto', km:'EXPERT', res:1, csat:0.0,   sc:1.0, dets:1 },
-  { ldap:'amcaldeira',   tl:'thaidossanto', km:'EXPERT', res:1, csat:0.0,   sc:1.0, dets:1 },
-  { ldap:'eduejesus',    tl:'thaidossanto', km:'NEWBIE', res:1, csat:0.0,   sc:2.0, dets:1 },
-  { ldap:'gabrielaaiol', tl:'imsilva',      km:'EXPERT', res:1, csat:0.0,   sc:1.0, dets:1 },
-  { ldap:'vltrevizan',   tl:'imsilva',      km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
-  { ldap:'kperrone',     tl:'thaidossanto', km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
-  { ldap:'vitnasciment', tl:'imsilva',      km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
-  { ldap:'marlaraujo',   tl:'alicarvalho',  km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
-  { ldap:'bcunha',       tl:'alicarvalho',  km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
-  { ldap:'pmarinho',     tl:'imsilva',      km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'sem dados', tl:'—', km:'—', res:0, csat:null, sc:null, dets:0 }
 ];
 
 const INTRA_TODAY = [
-  { h:'07h', res:5,  csat:80.0, det:1 },
-  { h:'08h', res:8,  csat:50.0, det:4 },
-  { h:'09h', res:2,  csat:50.0, det:1 },
+  { h:'—', res:0, csat:null, det:0 }
 ];
 
 function pct(v){ return v!=null ? v.toFixed(1)+'%' : '—' }
