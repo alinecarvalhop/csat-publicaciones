@@ -184,36 +184,34 @@ function csatTxt(v){   return v>=80?'#173404':v>=60?'#633806':'#4A1B0C' }
 <!-- ========== KPI BAR ========== -->
 <div class="kpi-bar">
   <div class="kpi-cell">
-    <div class="kv red">60,0%</div>
-    <div class="kl">CSAT agosto/MLB (3/ago)</div>
-    <div class="kd neu">1º dia com dados reais</div>
+    <div class="kv" id="kpi-csat">—</div>
+    <div class="kl" id="kpi-csat-lbl">CSAT agosto/MLB</div>
+    <div class="kd" id="kpi-csat-sub"></div>
   </div>
   <div class="kpi-cell">
-    <div class="kv">15</div>
+    <div class="kv" id="kpi-res">—</div>
     <div class="kl">Total respondidas</div>
-    <div class="kd neu">de 224 enviadas desde 01/ago</div>
+    <div class="kd neu" id="kpi-env-sub">—</div>
   </div>
   <div class="kpi-cell">
-    <div class="kv">216</div>
+    <div class="kv" id="kpi-env-hoje">—</div>
     <div class="kl">Pesquisas enviadas hoje</div>
-    <div class="kd neu">6,9% de resposta</div>
+    <div class="kd neu" id="kpi-taxa-sub">—</div>
   </div>
   <div class="kpi-cell">
-    <div class="kv red">6</div>
+    <div class="kv red" id="kpi-det">—</div>
     <div class="kl">Detratores (notas 1–2)</div>
-    <div class="kd down">40% das respostas</div>
+    <div class="kd down" id="kpi-det-pct">—</div>
   </div>
   <div class="kpi-cell">
-    <div class="kv green">9</div>
+    <div class="kv green" id="kpi-sat">—</div>
     <div class="kl">Satisfeitos (nota 5)</div>
-    <div class="kd up">60% das respostas</div>
+    <div class="kd up" id="kpi-sat-pct">—</div>
   </div>
 </div>
 
 <!-- ========== ALERT ========== -->
-<div class="alert-banner">
-  ⚠ Amostra extremamente pequena — 15 respostas, todas de 03/ago. 01/ago e 02/ago: 0 respostas (apenas 4 pesquisas enviadas em cada dia). Os percentuais oscilam muito nesta fase inicial.
-</div>
+<div class="alert-banner" id="alert-banner"></div>
 
 <!-- ========== TABS ========== -->
 <div class="tabs">
@@ -233,38 +231,18 @@ function csatTxt(v){   return v>=80?'#173404':v>=60?'#633806':'#4A1B0C' }
       <div class="chart-wrap"><canvas id="ch-trend"></canvas></div>
     </div>
     <div class="card">
-      <div class="card-title">Distribuição de notas <span>15 respostas · 03/ago · MLB</span></div>
+      <div class="card-title">Distribuição de notas <span id="score-card-sub">—</span></div>
       <div id="score-dist" style="margin-top:8px"></div>
       <div style="margin-top:14px;padding-top:12px;border-top:1px solid #F1EFE8;display:flex;gap:16px;flex-wrap:wrap">
-        <div><span style="font-size:18px;font-weight:900;color:#1D9E75">60,0%</span><span style="font-size:11px;color:#5F5E5A;margin-left:4px">satisfeitos (nota 5)</span></div>
-        <div><span style="font-size:18px;font-weight:900;color:#C84B00">40,0%</span><span style="font-size:11px;color:#5F5E5A;margin-left:4px">detratores (notas 1–2)</span></div>
-        <div><span style="font-size:14px;font-weight:900;color:#888780">0%</span><span style="font-size:11px;color:#5F5E5A;margin-left:4px">neutros (3–4)</span></div>
+        <div><span id="sc-sat" style="font-size:18px;font-weight:900;color:#1D9E75">—</span><span style="font-size:11px;color:#5F5E5A;margin-left:4px">satisfeitos (notas 4–5)</span></div>
+        <div><span id="sc-det" style="font-size:18px;font-weight:900;color:#C84B00">—</span><span style="font-size:11px;color:#5F5E5A;margin-left:4px">detratores (notas 1–2)</span></div>
+        <div><span id="sc-neu" style="font-size:14px;font-weight:900;color:#888780">—</span><span style="font-size:11px;color:#5F5E5A;margin-left:4px">neutros (nota 3)</span></div>
       </div>
     </div>
   </div>
 
-  <div class="sec-title">Principais achados <span class="pill">03/ago · MLB · n=15</span></div>
-
-  <div class="insight red">
-    <div class="insight-icon">🚨</div>
-    <div class="insight-text"><strong>Distribuição bimodal extrema:</strong> 9 notas 5 e 6 notas 1–2. Zero notas 3 ou 4. Sellers saem ou muito satisfeitos ou muito insatisfeitos — não há meio-termo. Isso sugere que o tipo de problema resolvido é o diferenciador.</div>
-  </div>
-  <div class="insight red">
-    <div class="insight-icon">⚠</div>
-    <div class="insight-text"><strong>ML Vendedor sem tipificação (55,6%):</strong> 9 das 15 respostas são desse processo, sem tipif. preenchida. Maior grupo e CSAT abaixo da média. Monitorar preenchimento de tipificação.</div>
-  </div>
-  <div class="insight amber">
-    <div class="insight-icon">📉</div>
-    <div class="insight-text"><strong>CHAT performando pior que C2C:</strong> CHAT Expert 57,1% vs C2C Expert 71,4%. Sellers no chat ficam mais insatisfeitos — pode ser tempo de espera, qualidade de resposta ou tipo de caso.</div>
-  </div>
-  <div class="insight amber">
-    <div class="insight-icon">👥</div>
-    <div class="insight-text"><strong>Thais com maior concentração de detratores (3):</strong> 5 respostas, CSAT 40%, 3 detratores — sendo amcaldeira, casbarreiros e eduejesus todos com nota 1–2.</div>
-  </div>
-  <div class="insight blue">
-    <div class="insight-icon">📊</div>
-    <div class="insight-text"><strong>Volume muito baixo:</strong> 01/ago e 02/ago tinham apenas 4 pesquisas enviadas por dia — motor ainda calibrando. 03/ago subiu para 216. Aguardar estabilização no volume para diagnósticos definitivos.</div>
-  </div>
+  <div class="sec-title">Principais achados <span class="pill" id="achados-pill">—</span></div>
+  <div id="achados-container"></div>
 </div>
 
 <!-- TAB 1 — CANAL -->
@@ -467,7 +445,47 @@ function renderVisaoGeral(){
     }
   });
 
-  const total=SCORES.reduce((a,b)=>a+b,0);
+  // ── métricas computadas ──────────────────────────────────────────
+  const totalRes  = DAILY.reduce((s,d)=>s+d.res, 0);
+  const totalEnv  = DAILY.reduce((s,d)=>s+d.env, 0);
+  const todayRow  = DAILY.length ? DAILY[DAILY.length-1] : null;
+  const total     = SCORES.reduce((a,b)=>a+b, 0);
+  const dets      = SCORES[0]+SCORES[1];
+  const sats5     = SCORES[4];
+  const satisfied = SCORES[3]+SCORES[4];
+  const csatPct   = total>0 ? (satisfied/total*100) : null;
+  const detPct    = total>0 ? (dets/total*100).toFixed(1)  : '—';
+  const satPct    = total>0 ? (sats5/total*100).toFixed(1) : '—';
+  const neuPct    = total>0 ? (SCORES[2]/total*100).toFixed(1) : '—';
+
+  // ── KPI bar ──────────────────────────────────────────────────────
+  const csatEl = document.getElementById('kpi-csat');
+  csatEl.textContent = csatPct!=null ? csatPct.toFixed(1)+'%' : '—';
+  csatEl.className   = 'kv '+(csatPct==null?'':csatPct>=80?'green':csatPct>=60?'amber':'red');
+  document.getElementById('kpi-csat-lbl').textContent = `CSAT agosto/MLB (${todayRow?todayRow.dia.toLowerCase():'—'})`;
+  document.getElementById('kpi-csat-sub').textContent = `${totalRes} respondidas no mês`;
+  document.getElementById('kpi-res').textContent      = totalRes;
+  document.getElementById('kpi-env-sub').textContent  = `de ${totalEnv} enviadas desde 01/ago`;
+  document.getElementById('kpi-env-hoje').textContent = todayRow ? todayRow.env : '—';
+  document.getElementById('kpi-taxa-sub').textContent = todayRow&&todayRow.taxa ? todayRow.taxa.toFixed(1)+'% de resposta' : '—';
+  document.getElementById('kpi-det').textContent      = dets;
+  document.getElementById('kpi-det-pct').textContent  = detPct+'% das respostas';
+  document.getElementById('kpi-sat').textContent      = sats5;
+  document.getElementById('kpi-sat-pct').textContent  = satPct+'% das respostas';
+
+  // ── alert banner ─────────────────────────────────────────────────
+  const banner = document.getElementById('alert-banner');
+  if(total>0 && total<50){
+    banner.style.display='block';
+    banner.textContent = `⚠ Amostra ainda pequena — ${total} respostas no total (${todayRow?todayRow.dia.toLowerCase():'—'}). Percentuais podem oscilar conforme o volume cresce.`;
+  } else { banner.style.display='none'; }
+
+  // ── card distribuição de notas ───────────────────────────────────
+  document.getElementById('score-card-sub').textContent = `${total} respostas · ${todayRow?todayRow.dia.toLowerCase():'—'} · MLB`;
+  document.getElementById('sc-sat').textContent = satPct+'%';
+  document.getElementById('sc-det').textContent = detPct+'%';
+  document.getElementById('sc-neu').textContent = neuPct+'%';
+
   const emojis=['😡','😕','😐','🙂','😄'];
   const labels5=['Péssimo','Ruim','Neutro','Bom','Ótimo'];
   const colors=['#F09595','#FAC775','#D3D1C7','#9FE1CB','#5DCAA5'];
@@ -481,6 +499,46 @@ function renderVisaoGeral(){
       <span class="score-pct">${p}%</span>
     </div>`;
   }).join('');
+
+  // ── achados dinâmicos ─────────────────────────────────────────────
+  document.getElementById('achados-pill').textContent = `${todayRow?todayRow.dia.toLowerCase():'—'} · MLB · n=${total}`;
+  const achados=[];
+  // CSAT geral
+  if(csatPct!=null){
+    const cor=csatPct>=80?'blue':csatPct>=60?'amber':'red';
+    achados.push({cor, icon:csatPct>=80?'✅':csatPct>=60?'📊':'🚨',
+      txt:`<strong>CSAT ${csatPct.toFixed(1)}%</strong> (${total} respostas). ${satisfied} de ${total} pesquisas com nota ≥4 — ${dets} detratores (notas 1–2).`});
+  }
+  // Canal
+  if(CANAL.length>1){
+    const sorted=[...CANAL].sort((a,b)=>b.csat-a.csat);
+    const best=sorted[0], worst=sorted[sorted.length-1];
+    if(best.csat-worst.csat>10)
+      achados.push({cor:'amber',icon:'📡',
+        txt:`<strong>${best.lbl}</strong> lidera com ${best.csat.toFixed(1)}% vs <strong>${worst.lbl}</strong> com ${worst.csat.toFixed(1)}% — diferença de ${(best.csat-worst.csat).toFixed(1)}pp.`});
+  }
+  // Processo com menor CSAT
+  if(PROCESSO.length>0){
+    const piorProc=PROCESSO.reduce((a,b)=>a.csat<b.csat?a:b);
+    if(piorProc.csat!=null&&piorProc.csat<60)
+      achados.push({cor:'red',icon:'🗂',
+        txt:`<strong>${piorProc.proc}</strong> é o processo com menor CSAT: ${piorProc.csat.toFixed(1)}% (${piorProc.res} resp.).`});
+  }
+  // TL com maior volume de detratores
+  if(TLS.length>0){
+    const piorTL=TLS.reduce((a,b)=>a.dets>b.dets?a:b);
+    if(piorTL.dets>0)
+      achados.push({cor:'amber',icon:'👥',
+        txt:`<strong>${piorTL.nome}</strong> concentra ${piorTL.dets} detratores — CSAT ${piorTL.csat!=null?piorTL.csat.toFixed(1)+'%':'—'} com ${piorTL.res} resp.`});
+  }
+  // Volume baixo
+  if(totalEnv<200)
+    achados.push({cor:'blue',icon:'📊',
+      txt:`<strong>Volume em calibração:</strong> ${totalEnv} enviadas desde 01/ago — motor CSAT em rodagem. Aguardar estabilização para diagnósticos definitivos.`});
+
+  document.getElementById('achados-container').innerHTML = achados.map(a=>
+    `<div class="insight ${a.cor}"><div class="insight-icon">${a.icon}</div><div class="insight-text">${a.txt}</div></div>`
+  ).join('');
 }
 
 function renderCanal(){
