@@ -341,23 +341,17 @@ function csatTxt(v){   return v>=80?'#173404':v>=60?'#633806':'#4A1B0C' }
 
 <!-- TAB 5 — INTRADIÁRIO -->
 <div class="panel" id="p5">
-  <div class="sec-title">Intradiário — 3/ago · MLB <span class="pill">dados até 09h</span></div>
+  <div class="sec-title" id="intra-title">Intradiário — MLB <span class="pill" id="intra-pill">—</span></div>
   <div class="g2">
     <div class="card">
       <div class="card-title">CSAT % e detratores hora a hora</div>
       <div class="chart-wrap sm"><canvas id="ch-intra"></canvas></div>
-      <div class="insight red" style="margin-top:12px">
-        <div class="insight-icon">📉</div>
-        <div class="insight-text"><strong>Pico de detratores às 8h (4 dets em 8 resp = 50%):</strong> O maior volume de respostas às 8h concentrou também o maior volume de detratores. Monitorar turno da manhã com atenção especial.</div>
-      </div>
+      <div id="intra-insight-det" style="margin-top:12px"></div>
     </div>
     <div class="card">
-      <div class="card-title">CSAT acumulado · 3/ago</div>
+      <div class="card-title" id="intra-acum-title">CSAT acumulado</div>
       <div class="chart-wrap sm"><canvas id="ch-intra-acum"></canvas></div>
-      <div class="insight amber" style="margin-top:12px">
-        <div class="insight-icon">📊</div>
-        <div class="insight-text"><strong>CSAT caindo conforme acumula:</strong> 80% às 7h → 62,5% acumulado às 8h → 60% acumulado às 9h. O acumulado do dia está pressionado pelo pico de 8h.</div>
-      </div>
+      <div id="intra-insight-acum" style="margin-top:12px"></div>
     </div>
   </div>
 
@@ -365,11 +359,7 @@ function csatTxt(v){   return v>=80?'#173404':v>=60?'#633806':'#4A1B0C' }
     <div class="card-title">Tabela hora a hora</div>
     <table class="tbl">
       <thead><tr><th>Hora</th><th>Respondidas</th><th>Detratores</th><th>CSAT%</th></tr></thead>
-      <tbody>
-        <tr><td><strong>07h</strong></td><td>5</td><td style="color:#C84B00;font-weight:700">1</td><td><span style="background:#EAF3DE;color:#173404;padding:3px 10px;border-radius:6px;font-weight:800">80,0%</span></td></tr>
-        <tr><td><strong>08h</strong></td><td>8</td><td style="color:#C84B00;font-weight:700">4</td><td><span style="background:#FAECE7;color:#4A1B0C;padding:3px 10px;border-radius:6px;font-weight:800">50,0%</span></td></tr>
-        <tr><td><strong>09h</strong></td><td>2</td><td style="color:#C84B00;font-weight:700">1</td><td><span style="background:#FAECE7;color:#4A1B0C;padding:3px 10px;border-radius:6px;font-weight:800">50,0%</span></td></tr>
-      </tbody>
+      <tbody id="intra-tbody"></tbody>
     </table>
   </div>
 </div>
@@ -672,6 +662,29 @@ function renderAgentes(){
 }
 
 function renderIntra(){
+  if(!INTRA_TODAY.length || INTRA_TODAY[0].h==='—'){
+    document.getElementById('intra-pill').textContent='sem dados hoje';
+    return;
+  }
+
+  // ── título dinâmico ───────────────────────────────────────────────
+  const lastH = INTRA_TODAY[INTRA_TODAY.length-1].h;
+  const today  = new Date();
+  const diaFmt = today.getDate()+'/'+(today.toLocaleString('pt-BR',{month:'short'})).replace('.','');
+  document.getElementById('intra-pill').textContent = `dados até ${lastH}`;
+  document.getElementById('intra-title').innerHTML  = `Intradiário — ${diaFmt} · MLB <span class="pill" id="intra-pill">dados até ${lastH}</span>`;
+  document.getElementById('intra-acum-title').textContent = `CSAT acumulado · ${diaFmt}`;
+
+  // ── tabela hora a hora ────────────────────────────────────────────
+  document.getElementById('intra-tbody').innerHTML = INTRA_TODAY.map(d=>`<tr>
+    <td><strong>${d.h}</strong></td>
+    <td>${d.res}</td>
+    <td style="color:${d.det>0?'#C84B00':'#1D9E75'};font-weight:700">${d.det}</td>
+    <td><span style="background:${csatBg(d.csat)};color:${csatTxt(d.csat)};padding:3px 10px;border-radius:6px;font-weight:800">${pct(d.csat)}</span></td>
+  </tr>`).join('');
+
+  // ── gráfico hora a hora ───────────────────────────────────────────
+  const maxDet = Math.max(...INTRA_TODAY.map(d=>d.det), 1);
   new Chart(document.getElementById('ch-intra'),{
     type:'bar',
     data:{
@@ -686,16 +699,14 @@ function renderIntra(){
       plugins:{ legend:{display:true,position:'top',labels:{boxWidth:10,font:{size:10}}} },
       scales:{
         y:{min:0,max:110,ticks:{callback:v=>v+'%'},grid:{color:'#F1EFE8'}},
-        y2:{min:0,max:6,position:'right',ticks:{stepSize:1},grid:{display:false}}
+        y2:{min:0,max:maxDet+1,position:'right',ticks:{stepSize:1},grid:{display:false}}
       }
     }
   });
 
+  // ── gráfico acumulado ─────────────────────────────────────────────
   let as=0, at=0;
-  const acc=INTRA_TODAY.map(d=>{
-    as+=Math.round(d.csat/100*d.res); at+=d.res;
-    return at>0?+(as/at*100).toFixed(1):null;
-  });
+  const acc=INTRA_TODAY.map(d=>{ as+=d.det?d.det:0; at+=d.res; return at>0?+((at-as)/at*100).toFixed(1):null; });
   new Chart(document.getElementById('ch-intra-acum'),{
     type:'line',
     data:{
@@ -704,6 +715,24 @@ function renderIntra(){
     },
     options:{ responsive:true, maintainAspectRatio:false, scales:{ y:{min:0,max:100,ticks:{callback:v=>v+'%'},grid:{color:'#F1EFE8'}} } }
   });
+
+  // ── insights dinâmicos ────────────────────────────────────────────
+  const piorH = INTRA_TODAY.reduce((a,b)=>b.det>a.det?b:a);
+  const detEl = document.getElementById('intra-insight-det');
+  if(piorH.det>0){
+    detEl.innerHTML=`<div class="insight red"><div class="insight-icon">📉</div><div class="insight-text"><strong>Pico de detratores às ${piorH.h} (${piorH.det} dets em ${piorH.res} resp = ${pct(100-piorH.csat)}):</strong> Maior concentração de insatisfação nessa hora. Monitorar casos desse turno.</div></div>`;
+  } else { detEl.innerHTML=''; }
+
+  const csatAcum = acc[acc.length-1];
+  const csatIni  = acc[0];
+  const acumEl   = document.getElementById('intra-insight-acum');
+  if(csatAcum!=null){
+    const delta = csatAcum-csatIni;
+    const cor   = delta>=0?'blue':'amber';
+    const icon  = delta>=0?'📈':'📊';
+    const traj  = acc.map((v,i)=>INTRA_TODAY[i].h+' '+v+'%').join(' → ');
+    acumEl.innerHTML=`<div class="insight ${cor}"><div class="insight-icon">${icon}</div><div class="insight-text"><strong>CSAT acumulado: ${traj}.</strong> ${delta>=0?'Tendência de melhora ao longo do dia.':'Acumulado pressionado — acompanhar evolução.'}</div></div>`;
+  } else { acumEl.innerHTML=''; }
 }
 
 chartsInited[0]=true;
