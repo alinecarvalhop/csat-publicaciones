@@ -77,7 +77,7 @@ canvas{display:block}
 
 <!-- ========== DADOS ========== -->
 <script>
-const ATU = '3 Ago 2026 · 12h38 · MLB apenas';
+const ATU = '3 Ago 2026 · 12h41 · MLB apenas';
 
 const DAILY = [
   { dia:'01/Ago', env:4, res:0, csat:null, taxa:0.0 },
@@ -94,33 +94,33 @@ const CANAL = [
 ];
 
 const PROCESSO = [
-  { proc:'ReputaciÃ³n', res:16, csat:50.0 },
+  { proc:'Reputación', res:16, csat:50.0 },
   { proc:'PR - Propiedad intelectual', res:2, csat:50.0 },
-  { proc:'ReputaciÃ³n ME', res:6, csat:83.3 },
-  { proc:'GestiÃ³n de PublicaciÃ³n', res:1, csat:100.0 },
-  { proc:'PR - TÃ©cnica prohibida', res:1, csat:100.0 },
+  { proc:'Reputación ME', res:6, csat:83.3 },
+  { proc:'Gestión de Publicación', res:1, csat:100.0 },
+  { proc:'PR - Técnica prohibida', res:1, csat:100.0 },
   { proc:'Post Compra Funcionalidades Vendedor', res:1, csat:100.0 }
 ];
 
 const SOLUCOES = [
-  { proc:'GestiÃ³n de PublicaciÃ³n', sol:'Modificar - PublicÃ³ en catÃ¡logo un producto diferente a lo', res:1, csat:100.0 },
-  { proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Quitamos la moderaciÃ³n para reactiv', res:1, csat:0.0 },
+  { proc:'Gestión de Publicación', sol:'Modificar - Publicó en catálogo un producto diferente a lo q', res:1, csat:100.0 },
+  { proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Quitamos la moderación para reactiva', res:1, csat:0.0 },
   { proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Aprobamos factura y reactivamos la p', res:1, csat:100.0 },
-  { proc:'PR - TÃ©cnica prohibida', sol:'TÃ©cnica prohibida - Rollback (reactivamos publicaciÃ³n)', res:1, csat:100.0 },
-  { proc:'Post Compra Funcionalidades Vendedor', sol:'Error en la mediaciÃ³n - Derivamos a MED', res:1, csat:100.0 },
-  { proc:'ReputaciÃ³n', sol:'Experiencia de compra - Status de la publicaciÃ³n', res:1, csat:0.0 },
-  { proc:'ReputaciÃ³n', sol:'Criterios reputaciÃ³n - CÃ³mo funciona la reputaciÃ³n', res:1, csat:0.0 },
-  { proc:'ReputaciÃ³n', sol:'Analizamos reputaciÃ³n - Reclamo afecta la reputaciÃ³n por p', res:1, csat:0.0 },
-  { proc:'ReputaciÃ³n', sol:'Analizamos reputaciÃ³n - Reclamo afecta la reputaciÃ³n por p', res:1, csat:0.0 },
-  { proc:'ReputaciÃ³n', sol:'Analizamos reputaciÃ³n - CancelaciÃ³n afecta la reputaciÃ³n ', res:1, csat:0.0 },
-  { proc:'ReputaciÃ³n', sol:'Analizamos reputaciÃ³n - Reclamo revisado', res:2, csat:50.0 },
-  { proc:'ReputaciÃ³n', sol:'Analizamos reputaciÃ³n - Reclamo afecta la reputaciÃ³n y exc', res:8, csat:87.5 },
-  { proc:'ReputaciÃ³n ME', sol:'ReputaciÃ³n ME Colecta XD: colecta pendiente', res:1, csat:0.0 },
-  { proc:'ReputaciÃ³n ME', sol:'ReputaciÃ³n ME Ventas: LogÃ­stica Cross Docking - Excluimos', res:1, csat:100.0 },
-  { proc:'ReputaciÃ³n ME', sol:'ReputaciÃ³n ME Ventas: EnvÃ­o no afecta al HT', res:1, csat:100.0 },
-  { proc:'ReputaciÃ³n ME', sol:'ReputaciÃ³n ME Ventas: LogÃ­stica Places - Excluimos', res:1, csat:100.0 },
-  { proc:'ReputaciÃ³n ME', sol:'ReputaciÃ³n: Consulta por HT sÃ¡bados y feriados (V)', res:1, csat:100.0 },
-  { proc:'ReputaciÃ³n ME', sol:'ReputaciÃ³n ME Ventas: LogÃ­stica Flex - Excluimos', res:1, csat:100.0 }
+  { proc:'PR - Técnica prohibida', sol:'Técnica prohibida - Rollback (reactivamos publicación)', res:1, csat:100.0 },
+  { proc:'Post Compra Funcionalidades Vendedor', sol:'Error en la mediación - Derivamos a MED', res:1, csat:100.0 },
+  { proc:'Reputación', sol:'Experiencia de compra - Status de la publicación', res:1, csat:0.0 },
+  { proc:'Reputación', sol:'Criterios reputación - Cómo funciona la reputación', res:1, csat:0.0 },
+  { proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación por pro', res:1, csat:0.0 },
+  { proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación por pro', res:1, csat:0.0 },
+  { proc:'Reputación', sol:'Analizamos reputación - Cancelación afecta la reputación y m', res:1, csat:0.0 },
+  { proc:'Reputación', sol:'Analizamos reputación - Reclamo revisado', res:2, csat:50.0 },
+  { proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación y exclu', res:8, csat:87.5 },
+  { proc:'Reputación ME', sol:'Reputación ME Colecta XD: colecta pendiente', res:1, csat:0.0 },
+  { proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Cross Docking - Excluimos', res:1, csat:100.0 },
+  { proc:'Reputación ME', sol:'Reputación ME Ventas: Envío no afecta al HT', res:1, csat:100.0 },
+  { proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Places - Excluimos', res:1, csat:100.0 },
+  { proc:'Reputación ME', sol:'Reputación: Consulta por HT sábados y feriados (V)', res:1, csat:100.0 },
+  { proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Flex - Excluimos', res:1, csat:100.0 }
 ];
 
 const TLS = [
