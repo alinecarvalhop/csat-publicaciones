@@ -78,92 +78,99 @@ canvas{display:block}
 
 <!-- ========== DADOS ========== -->
 <script>
-const ATU = '3 Ago 2026 · 13h57 · MLB apenas';
+const ATU = '3 Ago 2026 · 14h36 · MLB apenas';
 
 const DAILY = [
   { dia:'01/Ago', env:4, res:0, csat:null, taxa:0.0 },
   { dia:'02/Ago', env:4, res:0, csat:null, taxa:0.0 },
-  { dia:'03/Ago', env:396, res:38, csat:63.2, taxa:9.6 }
+  { dia:'03/Ago', env:454, res:44, csat:65.9, taxa:9.7 }
 ];
 
-const SCORES = [9, 5, 0, 2, 22]; // n1..n5
+const SCORES = [9, 6, 0, 2, 27]; // n1..n5
 
 const CANAL = [
   { lbl:'C2C · Newbie', res:1, csat:100.0, n:[0,0,0,0,1] },
-  { lbl:'CHAT · Expert', res:25, csat:64.0, n:[7,2,0,2,14] },
-  { lbl:'C2C · Expert', res:11, csat:63.6, n:[2,2,0,0,7] },
+  { lbl:'C2C · Expert', res:13, csat:69.2, n:[2,2,0,0,9] },
+  { lbl:'CHAT · Expert', res:29, csat:65.5, n:[7,3,0,2,17] },
   { lbl:'CHAT · Newbie', res:1, csat:0.0, n:[0,1,0,0,0] }
 ];
 
 const PROCESSO = [
-  { proc:'Reputación', res:22, csat:45.5 },
-  { proc:'PR - Propiedad intelectual', res:3, csat:66.7 },
-  { proc:'Reputación ME', res:10, csat:90.0 },
+  { proc:'Potenciar Ventas', res:1, csat:0.0 },
+  { proc:'Reputación', res:23, csat:47.8 },
+  { proc:'PR - Propiedad intelectual', res:4, csat:75.0 },
+  { proc:'Reputación ME', res:11, csat:90.9 },
+  { proc:'Gestión de Publicación', res:3, csat:100.0 },
   { proc:'PR - Técnica prohibida', res:1, csat:100.0 },
-  { proc:'Gestión de Publicación', res:1, csat:100.0 },
   { proc:'Post Compra Funcionalidades Vendedor', res:1, csat:100.0 }
 ];
 
 const SOLUCOES = [
+  { proc:'Gestión de Publicación', sol:'Catálogo - Debe enviar una sugerencia de corrección de catál', res:1, csat:100.0 },
   { proc:'Gestión de Publicación', sol:'Modificar - Publicó en catálogo un producto diferente a lo q', res:1, csat:100.0 },
+  { proc:'Gestión de Publicación', sol:'Gestión de ventas - Consultar detalle y estado de la venta', res:1, csat:100.0 },
   { proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Quitamos la moderación para reactiva', res:1, csat:0.0 },
-  { proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Aprobamos factura y reactivamos la p', res:2, csat:100.0 },
+  { proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Aprobamos factura y reactivamos la p', res:3, csat:100.0 },
   { proc:'PR - Técnica prohibida', sol:'Técnica prohibida - Rollback (reactivamos publicación)', res:1, csat:100.0 },
   { proc:'Post Compra Funcionalidades Vendedor', sol:'Error en la mediación - Derivamos a MED', res:1, csat:100.0 },
-  { proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación por pro', res:1, csat:0.0 },
-  { proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación por pro', res:2, csat:0.0 },
+  { proc:'Potenciar Ventas', sol:'Potenciador (Publicidad) - Programa de asesoría', res:1, csat:0.0 },
   { proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación por pro', res:1, csat:0.0 },
   { proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación por pro', res:1, csat:0.0 },
   { proc:'Reputación', sol:'Analizamos reputación - Cancelación afecta la reputación y m', res:1, csat:0.0 },
   { proc:'Reputación', sol:'Criterios reputación - Cómo funciona la reputación', res:1, csat:0.0 },
+  { proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación por pro', res:2, csat:0.0 },
+  { proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación por pro', res:1, csat:0.0 },
   { proc:'Reputación', sol:'Analizamos reputación - Reclamo revisado', res:2, csat:50.0 },
   { proc:'Reputación', sol:'Experiencia de compra - Status de la publicación', res:2, csat:50.0 },
   { proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación y exclu', res:10, csat:80.0 },
+  { proc:'Reputación', sol:'Analizamos reputación - Cancelación afecta la reputación y e', res:1, csat:100.0 },
   { proc:'Reputación ME', sol:'Reputación ME Colecta XD: colecta pendiente', res:2, csat:50.0 },
-  { proc:'Reputación ME', sol:'Reputación: Consulta por HT sábados y feriados (V)', res:1, csat:100.0 },
-  { proc:'Reputación ME', sol:'Reputación ME Ventas: Envío no afecta al HT', res:1, csat:100.0 },
-  { proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Flex - Excluimos', res:2, csat:100.0 },
-  { proc:'Reputación ME', sol:'Reputación ME Ventas: Vendedor newbie - Excluimos', res:1, csat:100.0 },
   { proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Cross Docking - Excluimos', res:2, csat:100.0 },
-  { proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Places - Excluimos', res:1, csat:100.0 }
+  { proc:'Reputación ME', sol:'Reputación ME Ventas: Envío no afecta al HT', res:1, csat:100.0 },
+  { proc:'Reputación ME', sol:'Reputación: Consulta por HT sábados y feriados (V)', res:1, csat:100.0 },
+  { proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Places - Excluimos', res:1, csat:100.0 },
+  { proc:'Reputación ME', sol:'Reputación ME Ventas: Vendedor newbie - Excluimos', res:1, csat:100.0 },
+  { proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Flex - Excluimos', res:3, csat:100.0 }
 ];
 
 const TLS = [
-  { tl:'bkaroline', nome:'Bruna', res:2, csat:50.0, dets:1 },
-  { tl:'lrossetto', nome:'Letícia', res:4, csat:50.0, dets:2 },
-  { tl:'thaidossanto', nome:'Thais', res:10, csat:50.0, dets:5 },
+  { tl:'thaidossanto', nome:'Thais', res:11, csat:54.5, dets:5 },
+  { tl:'lrossetto', nome:'Letícia', res:5, csat:60.0, dets:2 },
   { tl:'alicarvalho', nome:'Aline', res:8, csat:62.5, dets:3 },
-  { tl:'imsilva', nome:'Ivan', res:8, csat:75.0, dets:2 },
-  { tl:'isabmot', nome:'Isabela', res:6, csat:83.3, dets:1 }
+  { tl:'isabmot', nome:'Isabela', res:7, csat:71.4, dets:2 },
+  { tl:'bkaroline', nome:'Bruna', res:4, csat:75.0, dets:1 },
+  { tl:'imsilva', nome:'Ivan', res:9, csat:77.8, dets:2 }
 ];
 
 const AGENTES = [
   { ldap:'casbarreiros', tl:'thaidossanto', km:'EXPERT', res:3, csat:0.0, sc:1.0, dets:3 },
-  { ldap:'eduejesus', tl:'thaidossanto', km:'NEWBIE', res:1, csat:0.0, sc:2.0, dets:1 },
+  { ldap:'linessousa', tl:'imsilva', km:'EXPERT', res:1, csat:0.0, sc:2.0, dets:1 },
   { ldap:'gabrielaaiol', tl:'imsilva', km:'EXPERT', res:1, csat:0.0, sc:1.0, dets:1 },
-  { ldap:'cafarias', tl:'alicarvalho', km:'EXPERT', res:1, csat:0.0, sc:1.0, dets:1 },
+  { ldap:'stdiniz', tl:'alicarvalho', km:'EXPERT', res:1, csat:0.0, sc:1.0, dets:1 },
   { ldap:'csnunes', tl:'lrossetto', km:'EXPERT', res:1, csat:0.0, sc:2.0, dets:1 },
   { ldap:'cdoliveira', tl:'lrossetto', km:'EXPERT', res:1, csat:0.0, sc:1.0, dets:1 },
+  { ldap:'cafarias', tl:'alicarvalho', km:'EXPERT', res:1, csat:0.0, sc:1.0, dets:1 },
+  { ldap:'eduejesus', tl:'thaidossanto', km:'NEWBIE', res:1, csat:0.0, sc:2.0, dets:1 },
   { ldap:'vfarias', tl:'alicarvalho', km:'EXPERT', res:1, csat:0.0, sc:1.0, dets:1 },
-  { ldap:'stdiniz', tl:'alicarvalho', km:'EXPERT', res:1, csat:0.0, sc:1.0, dets:1 },
-  { ldap:'aldmelo', tl:'bkaroline', km:'EXPERT', res:1, csat:0.0, sc:2.0, dets:1 },
-  { ldap:'linessousa', tl:'imsilva', km:'EXPERT', res:1, csat:0.0, sc:2.0, dets:1 },
-  { ldap:'amcandido', tl:'isabmot', km:'EXPERT', res:2, csat:50.0, sc:3.5, dets:1 },
-  { ldap:'amcaldeira', tl:'thaidossanto', km:'EXPERT', res:2, csat:50.0, sc:3.0, dets:1 },
+  { ldap:'amcandido', tl:'isabmot', km:'EXPERT', res:3, csat:33.3, sc:3.0, dets:2 },
+  { ldap:'aldmelo', tl:'bkaroline', km:'EXPERT', res:2, csat:50.0, sc:3.5, dets:1 },
+  { ldap:'amcaldeira', tl:'thaidossanto', km:'EXPERT', res:3, csat:66.7, sc:3.7, dets:1 },
   { ldap:'vltrevizan', tl:'imsilva', km:'EXPERT', res:3, csat:100.0, sc:5.0, dets:0 },
-  { ldap:'ulissouza', tl:'thaidossanto', km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
-  { ldap:'vitnasciment', tl:'imsilva', km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
   { ldap:'marlaraujo', tl:'alicarvalho', km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
   { ldap:'bcunha', tl:'alicarvalho', km:'EXPERT', res:2, csat:100.0, sc:4.5, dets:0 },
+  { ldap:'vitnasciment', tl:'imsilva', km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'ulissouza', tl:'thaidossanto', km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
   { ldap:'renataperei', tl:'isabmot', km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
   { ldap:'kperrone', tl:'thaidossanto', km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
-  { ldap:'marguedes', tl:'alicarvalho', km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
-  { ldap:'vfonorio', tl:'isabmot', km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
-  { ldap:'lteixeira', tl:'lrossetto', km:'NEWBIE', res:1, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'pmarinho', tl:'imsilva', km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
   { ldap:'mrmarques', tl:'isabmot', km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
-  { ldap:'pmarinho', tl:'imsilva', km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'marguedes', tl:'alicarvalho', km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'adysantos', tl:'lrossetto', km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'lteixeira', tl:'lrossetto', km:'NEWBIE', res:1, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'lecandido', tl:'bkaroline', km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
   { ldap:'vdpiedade', tl:'bkaroline', km:'EXPERT', res:1, csat:100.0, sc:4.0, dets:0 },
-  { ldap:'adysantos', tl:'lrossetto', km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 }
+  { ldap:'vfonorio', tl:'isabmot', km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'amarquini', tl:'lrossetto', km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 }
 ];
 
 const INTRA_TODAY = [
@@ -171,10 +178,17 @@ const INTRA_TODAY = [
   { h:'08h', res:8, csat:50.0, det:4 },
   { h:'09h', res:3, csat:66.7, det:1 },
   { h:'10h', res:11, csat:63.6, det:4 },
-  { h:'11h', res:11, csat:63.6, det:4 }
+  { h:'11h', res:11, csat:63.6, det:4 },
+  { h:'12h', res:6, csat:83.3, det:1 }
 ];
 
 const DETRATORES_IND = [
+  { caso:'473191837', ldap:'aldmelo', tl:'bkaroline', proc:'Gestión de Publicación', sol:'Catálogo - Debe enviar una sugerencia de corrección de ', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 12h42', cmt:'Muito Educada e pacienete parabens' },
+  { caso:'473183097', ldap:'lecandido', tl:'bkaroline', proc:'Gestión de Publicación', sol:'Gestión de ventas - Consultar detalle y estado de la ve', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 12h34', cmt:'' },
+  { caso:'473179141', ldap:'amcandido', tl:'isabmot', proc:'Potenciar Ventas', sol:'Potenciador (Publicidad) - Programa de asesoría', sc:2, canal:'CHAT', km:'EXPERT', dt:'03/08 12h17', cmt:'' },
+  { caso:'473186075', ldap:'amcaldeira', tl:'thaidossanto', proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Aprobamos factura y reactivamos', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 12h15', cmt:'Rapidez no atendimento e solução do meu problema ' },
+  { caso:'473189024', ldap:'amarquini', tl:'lrossetto', proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Flex - Excluimos', sc:5, canal:'C2C', km:'EXPERT', dt:'03/08 12h11', cmt:'' },
+  { caso:'473184556', ldap:'pmarinho', tl:'imsilva', proc:'Reputación', sol:'Analizamos reputación - Cancelación afecta la reputació', sc:5, canal:'C2C', km:'EXPERT', dt:'03/08 12h02', cmt:'gostaria de enaltecer o atendimento do Pedro.  Confesso que tinha um certo tempo em que não caia com um atendente tão bo' },
   { caso:'473186267', ldap:'lteixeira', tl:'lrossetto', proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Flex - Excluimos', sc:5, canal:'C2C', km:'NEWBIE', dt:'03/08 11h54', cmt:'Leonardo foi um excelente profissional' },
   { caso:'473185367', ldap:'vltrevizan', tl:'imsilva', proc:'Reputación ME', sol:'Reputación ME Ventas: Vendedor newbie - Excluimos', sc:5, canal:'C2C', km:'EXPERT', dt:'03/08 11h50', cmt:'' },
   { caso:'473155399', ldap:'amcaldeira', tl:'thaidossanto', proc:'Reputación', sol:'Experiencia de compra - Status de la publicación', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 11h42', cmt:'' },
@@ -218,8 +232,12 @@ const DETRATORES_IND = [
 const AGENTE_PROC = [
   { ldap:'adysantos', proc:'Reputación ME', res:1, csat:100.0, dets:0 },
   { ldap:'aldmelo', proc:'Reputación', res:1, csat:0.0, dets:1 },
+  { ldap:'aldmelo', proc:'Gestión de Publicación', res:1, csat:100.0, dets:0 },
+  { ldap:'amarquini', proc:'Reputación ME', res:1, csat:100.0, dets:0 },
   { ldap:'amcaldeira', proc:'Reputación', res:2, csat:50.0, dets:1 },
+  { ldap:'amcaldeira', proc:'PR - Propiedad intelectual', res:1, csat:100.0, dets:0 },
   { ldap:'amcandido', proc:'Reputación', res:1, csat:0.0, dets:1 },
+  { ldap:'amcandido', proc:'Potenciar Ventas', res:1, csat:0.0, dets:1 },
   { ldap:'amcandido', proc:'PR - Propiedad intelectual', res:1, csat:100.0, dets:0 },
   { ldap:'bcunha', proc:'Reputación', res:1, csat:100.0, dets:0 },
   { ldap:'bcunha', proc:'Gestión de Publicación', res:1, csat:100.0, dets:0 },
@@ -230,85 +248,88 @@ const AGENTE_PROC = [
   { ldap:'eduejesus', proc:'Reputación', res:1, csat:0.0, dets:1 },
   { ldap:'gabrielaaiol', proc:'Reputación ME', res:1, csat:0.0, dets:1 },
   { ldap:'kperrone', proc:'Reputación', res:2, csat:100.0, dets:0 },
+  { ldap:'lecandido', proc:'Gestión de Publicación', res:1, csat:100.0, dets:0 },
   { ldap:'linessousa', proc:'Reputación', res:1, csat:0.0, dets:1 },
   { ldap:'lteixeira', proc:'Reputación ME', res:1, csat:100.0, dets:0 },
   { ldap:'marguedes', proc:'Reputación', res:1, csat:100.0, dets:0 },
   { ldap:'marlaraujo', proc:'Reputación', res:1, csat:100.0, dets:0 },
   { ldap:'marlaraujo', proc:'PR - Propiedad intelectual', res:1, csat:100.0, dets:0 },
   { ldap:'mrmarques', proc:'PR - Técnica prohibida', res:1, csat:100.0, dets:0 },
+  { ldap:'pmarinho', proc:'Reputación', res:1, csat:100.0, dets:0 },
   { ldap:'pmarinho', proc:'Post Compra Funcionalidades Vendedor', res:1, csat:100.0, dets:0 },
-  { ldap:'renataperei', proc:'Reputación', res:1, csat:100.0, dets:0 },
   { ldap:'renataperei', proc:'Reputación ME', res:1, csat:100.0, dets:0 },
+  { ldap:'renataperei', proc:'Reputación', res:1, csat:100.0, dets:0 },
   { ldap:'stdiniz', proc:'Reputación', res:1, csat:0.0, dets:1 },
   { ldap:'ulissouza', proc:'Reputación', res:2, csat:100.0, dets:0 },
   { ldap:'vdpiedade', proc:'Reputación ME', res:1, csat:100.0, dets:0 },
   { ldap:'vfarias', proc:'PR - Propiedad intelectual', res:1, csat:0.0, dets:1 },
   { ldap:'vfonorio', proc:'Reputación ME', res:1, csat:100.0, dets:0 },
   { ldap:'vitnasciment', proc:'Reputación ME', res:2, csat:100.0, dets:0 },
-  { ldap:'vltrevizan', proc:'Reputación ME', res:2, csat:100.0, dets:0 },
-  { ldap:'vltrevizan', proc:'Reputación', res:1, csat:100.0, dets:0 }
+  { ldap:'vltrevizan', proc:'Reputación', res:1, csat:100.0, dets:0 },
+  { ldap:'vltrevizan', proc:'Reputación ME', res:2, csat:100.0, dets:0 }
 ];
 
 const PROMO_DET = [
-  { proc:'Reputación', promo:10, det:12, total:22, csat:45.5 },
-  { proc:'PR - Propiedad intelectual', promo:2, det:1, total:3, csat:66.7 },
-  { proc:'Reputación ME', promo:9, det:1, total:10, csat:90.0 },
+  { proc:'Reputación', promo:11, det:12, total:23, csat:47.8 },
+  { proc:'PR - Propiedad intelectual', promo:3, det:1, total:4, csat:75.0 },
+  { proc:'Potenciar Ventas', promo:0, det:1, total:1, csat:0.0 },
+  { proc:'Reputación ME', promo:10, det:1, total:11, csat:90.9 },
   { proc:'PR - Técnica prohibida', promo:1, det:0, total:1, csat:100.0 },
-  { proc:'Gestión de Publicación', promo:1, det:0, total:1, csat:100.0 },
+  { proc:'Gestión de Publicación', promo:3, det:0, total:3, csat:100.0 },
   { proc:'Post Compra Funcionalidades Vendedor', promo:1, det:0, total:1, csat:100.0 }
 ];
 
 const TAXA_RESP = [
-  { ldap:'uizfsilva', tl:'alicarvalho', env:13, res:0, taxa:0.0, csat:null },
-  { ldap:'fenunes', tl:'bkaroline', env:5, res:0, taxa:0.0, csat:null },
-  { ldap:'losouza', tl:'alicarvalho', env:7, res:0, taxa:0.0, csat:null },
-  { ldap:'lianadsilva', tl:'alicarvalho', env:16, res:0, taxa:0.0, csat:null },
-  { ldap:'lecandido', tl:'bkaroline', env:3, res:0, taxa:0.0, csat:null },
-  { ldap:'raisacsantos', tl:'lrossetto', env:3, res:0, taxa:0.0, csat:null },
-  { ldap:'imsilva', tl:'leapereira', env:1, res:0, taxa:0.0, csat:null },
-  { ldap:'phegoncalves', tl:'alicarvalho', env:10, res:0, taxa:0.0, csat:null },
-  { ldap:'polivdaraujo', tl:'bkaroline', env:5, res:0, taxa:0.0, csat:null },
-  { ldap:'camcsilva', tl:'bkaroline', env:4, res:0, taxa:0.0, csat:null },
-  { ldap:'mudiniz', tl:'imsilva', env:11, res:0, taxa:0.0, csat:null },
-  { ldap:'blvicente', tl:'bkaroline', env:5, res:0, taxa:0.0, csat:null },
-  { ldap:'luciagarcia', tl:'lrossetto', env:4, res:0, taxa:0.0, csat:null },
-  { ldap:'amarquini', tl:'lrossetto', env:4, res:0, taxa:0.0, csat:null },
+  { ldap:'lianadsilva', tl:'alicarvalho', env:17, res:0, taxa:0.0, csat:null },
   { ldap:'bemarques', tl:'thaidossanto', env:1, res:0, taxa:0.0, csat:null },
-  { ldap:'marcovenicio', tl:'lrossetto', env:5, res:0, taxa:0.0, csat:null },
-  { ldap:'jecosta', tl:'imsilva', env:7, res:0, taxa:0.0, csat:null },
-  { ldap:'tsgarbim', tl:'imsilva', env:14, res:0, taxa:0.0, csat:null },
-  { ldap:'cccsousa', tl:'isabmot', env:5, res:0, taxa:0.0, csat:null },
-  { ldap:'gbmontilha', tl:'bkaroline', env:8, res:0, taxa:0.0, csat:null },
-  { ldap:'mandoliveira', tl:'isabmot', env:4, res:0, taxa:0.0, csat:null },
-  { ldap:'maybalazshaz', tl:'bkaroline', env:3, res:0, taxa:0.0, csat:null },
   { ldap:'elaoliveira', tl:'isabmot', env:5, res:0, taxa:0.0, csat:null },
+  { ldap:'mandoliveira', tl:'isabmot', env:6, res:0, taxa:0.0, csat:null },
+  { ldap:'losouza', tl:'alicarvalho', env:9, res:0, taxa:0.0, csat:null },
+  { ldap:'camcsilva', tl:'bkaroline', env:5, res:0, taxa:0.0, csat:null },
+  { ldap:'jecosta', tl:'imsilva', env:8, res:0, taxa:0.0, csat:null },
+  { ldap:'blvicente', tl:'bkaroline', env:6, res:0, taxa:0.0, csat:null },
   { ldap:'aaugustinho', tl:'alicarvalho', env:1, res:0, taxa:0.0, csat:null },
-  { ldap:'gabrielaaiol', tl:'imsilva', env:18, res:1, taxa:5.6, csat:0.0 },
-  { ldap:'eduejesus', tl:'thaidossanto', env:16, res:1, taxa:6.3, csat:0.0 },
-  { ldap:'cafarias', tl:'alicarvalho', env:15, res:1, taxa:6.7, csat:0.0 },
+  { ldap:'uizfsilva', tl:'alicarvalho', env:14, res:0, taxa:0.0, csat:null },
+  { ldap:'polivdaraujo', tl:'bkaroline', env:5, res:0, taxa:0.0, csat:null },
+  { ldap:'maybalazshaz', tl:'bkaroline', env:6, res:0, taxa:0.0, csat:null },
+  { ldap:'fenunes', tl:'bkaroline', env:7, res:0, taxa:0.0, csat:null },
+  { ldap:'tsgarbim', tl:'imsilva', env:15, res:0, taxa:0.0, csat:null },
+  { ldap:'luciagarcia', tl:'lrossetto', env:4, res:0, taxa:0.0, csat:null },
+  { ldap:'marcovenicio', tl:'lrossetto', env:8, res:0, taxa:0.0, csat:null },
+  { ldap:'raisacsantos', tl:'lrossetto', env:3, res:0, taxa:0.0, csat:null },
+  { ldap:'phegoncalves', tl:'alicarvalho', env:12, res:0, taxa:0.0, csat:null },
+  { ldap:'gbmontilha', tl:'bkaroline', env:8, res:0, taxa:0.0, csat:null },
+  { ldap:'mudiniz', tl:'imsilva', env:12, res:0, taxa:0.0, csat:null },
+  { ldap:'imsilva', tl:'leapereira', env:1, res:0, taxa:0.0, csat:null },
+  { ldap:'cccsousa', tl:'isabmot', env:5, res:0, taxa:0.0, csat:null },
+  { ldap:'gabrielaaiol', tl:'imsilva', env:19, res:1, taxa:5.3, csat:0.0 },
+  { ldap:'eduejesus', tl:'thaidossanto', env:19, res:1, taxa:5.3, csat:0.0 },
+  { ldap:'cafarias', tl:'alicarvalho', env:17, res:1, taxa:5.9, csat:0.0 },
+  { ldap:'vfarias', tl:'alicarvalho', env:15, res:1, taxa:6.7, csat:0.0 },
   { ldap:'linessousa', tl:'imsilva', env:14, res:1, taxa:7.1, csat:0.0 },
   { ldap:'marguedes', tl:'alicarvalho', env:13, res:1, taxa:7.7, csat:100.0 },
-  { ldap:'vfarias', tl:'alicarvalho', env:13, res:1, taxa:7.7, csat:0.0 },
-  { ldap:'stdiniz', tl:'alicarvalho', env:10, res:1, taxa:10.0, csat:0.0 },
-  { ldap:'amcaldeira', tl:'thaidossanto', env:18, res:2, taxa:11.1, csat:50.0 },
-  { ldap:'pmarinho', tl:'imsilva', env:8, res:1, taxa:12.5, csat:100.0 },
+  { ldap:'stdiniz', tl:'alicarvalho', env:11, res:1, taxa:9.1, csat:0.0 },
+  { ldap:'casbarreiros', tl:'thaidossanto', env:22, res:3, taxa:13.6, csat:0.0 },
   { ldap:'adysantos', tl:'lrossetto', env:7, res:1, taxa:14.3, csat:100.0 },
-  { ldap:'aldmelo', tl:'bkaroline', env:7, res:1, taxa:14.3, csat:0.0 },
-  { ldap:'casbarreiros', tl:'thaidossanto', env:21, res:3, taxa:14.3, csat:0.0 },
+  { ldap:'mrmarques', tl:'isabmot', env:7, res:1, taxa:14.3, csat:100.0 },
+  { ldap:'amarquini', tl:'lrossetto', env:7, res:1, taxa:14.3, csat:100.0 },
+  { ldap:'amcaldeira', tl:'thaidossanto', env:20, res:3, taxa:15.0, csat:66.7 },
+  { ldap:'aldmelo', tl:'bkaroline', env:13, res:2, taxa:15.4, csat:50.0 },
+  { ldap:'ulissouza', tl:'thaidossanto', env:13, res:2, taxa:15.4, csat:100.0 },
+  { ldap:'bcunha', tl:'alicarvalho', env:13, res:2, taxa:15.4, csat:100.0 },
+  { ldap:'vfonorio', tl:'isabmot', env:6, res:1, taxa:16.7, csat:100.0 },
   { ldap:'vltrevizan', tl:'imsilva', env:18, res:3, taxa:16.7, csat:100.0 },
-  { ldap:'ulissouza', tl:'thaidossanto', env:12, res:2, taxa:16.7, csat:100.0 },
-  { ldap:'bcunha', tl:'alicarvalho', env:11, res:2, taxa:18.2, csat:100.0 },
-  { ldap:'vfonorio', tl:'isabmot', env:5, res:1, taxa:20.0, csat:100.0 },
-  { ldap:'marlaraujo', tl:'alicarvalho', env:10, res:2, taxa:20.0, csat:100.0 },
-  { ldap:'mrmarques', tl:'isabmot', env:4, res:1, taxa:25.0, csat:100.0 },
-  { ldap:'vdpiedade', tl:'bkaroline', env:4, res:1, taxa:25.0, csat:100.0 },
-  { ldap:'lteixeira', tl:'lrossetto', env:4, res:1, taxa:25.0, csat:100.0 },
-  { ldap:'renataperei', tl:'isabmot', env:8, res:2, taxa:25.0, csat:100.0 },
-  { ldap:'amcandido', tl:'isabmot', env:7, res:2, taxa:28.6, csat:50.0 },
-  { ldap:'cdoliveira', tl:'lrossetto', env:3, res:1, taxa:33.3, csat:0.0 },
+  { ldap:'marlaraujo', tl:'alicarvalho', env:11, res:2, taxa:18.2, csat:100.0 },
+  { ldap:'lteixeira', tl:'lrossetto', env:5, res:1, taxa:20.0, csat:100.0 },
+  { ldap:'vdpiedade', tl:'bkaroline', env:5, res:1, taxa:20.0, csat:100.0 },
+  { ldap:'renataperei', tl:'isabmot', env:9, res:2, taxa:22.2, csat:100.0 },
+  { ldap:'pmarinho', tl:'imsilva', env:9, res:2, taxa:22.2, csat:100.0 },
+  { ldap:'lecandido', tl:'bkaroline', env:4, res:1, taxa:25.0, csat:100.0 },
+  { ldap:'cdoliveira', tl:'lrossetto', env:4, res:1, taxa:25.0, csat:0.0 },
+  { ldap:'csnunes', tl:'lrossetto', env:3, res:1, taxa:33.3, csat:0.0 },
   { ldap:'kperrone', tl:'thaidossanto', env:6, res:2, taxa:33.3, csat:100.0 },
   { ldap:'vitnasciment', tl:'imsilva', env:6, res:2, taxa:33.3, csat:100.0 },
-  { ldap:'csnunes', tl:'lrossetto', env:2, res:1, taxa:50.0, csat:0.0 }
+  { ldap:'amcandido', tl:'isabmot', env:8, res:3, taxa:37.5, csat:33.3 }
 ];
 
 function pct(v){ return v!=null ? v.toFixed(1)+'%' : '—' }
