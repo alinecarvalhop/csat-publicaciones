@@ -78,7 +78,7 @@ canvas{display:block}
 
 <!-- ========== DADOS ========== -->
 <script>
-const ATU = '3 Ago 2026 · 13h43 · MLB apenas';
+const ATU = '3 Ago 2026 · 13h51 · MLB apenas';
 
 const DAILY = [
   { dia:'01/Ago', env:4, res:0, csat:null, taxa:0.0 },
@@ -96,36 +96,36 @@ const CANAL = [
 ];
 
 const PROCESSO = [
-  { proc:'Reputaci�n', res:22, csat:45.5 },
+  { proc:'Reputación', res:22, csat:45.5 },
   { proc:'PR - Propiedad intelectual', res:3, csat:66.7 },
-  { proc:'Reputaci�n ME', res:10, csat:90.0 },
-  { proc:'PR - T�cnica prohibida', res:1, csat:100.0 },
-  { proc:'Gesti�n de Publicaci�n', res:1, csat:100.0 },
+  { proc:'Reputación ME', res:10, csat:90.0 },
+  { proc:'PR - Técnica prohibida', res:1, csat:100.0 },
+  { proc:'Gestión de Publicación', res:1, csat:100.0 },
   { proc:'Post Compra Funcionalidades Vendedor', res:1, csat:100.0 }
 ];
 
 const SOLUCOES = [
-  { proc:'Gesti�n de Publicaci�n', sol:'Modificar - Public� en cat�logo un producto diferente a lo q', res:1, csat:100.0 },
-  { proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Quitamos la moderaci�n para reactiva', res:1, csat:0.0 },
+  { proc:'Gestión de Publicación', sol:'Modificar - Publicó en catálogo un producto diferente a lo q', res:1, csat:100.0 },
+  { proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Quitamos la moderación para reactiva', res:1, csat:0.0 },
   { proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Aprobamos factura y reactivamos la p', res:2, csat:100.0 },
-  { proc:'PR - T�cnica prohibida', sol:'T�cnica prohibida - Rollback (reactivamos publicaci�n)', res:1, csat:100.0 },
-  { proc:'Post Compra Funcionalidades Vendedor', sol:'Error en la mediaci�n - Derivamos a MED', res:1, csat:100.0 },
-  { proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n por pro', res:1, csat:0.0 },
-  { proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n por pro', res:2, csat:0.0 },
-  { proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n por pro', res:1, csat:0.0 },
-  { proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n por pro', res:1, csat:0.0 },
-  { proc:'Reputaci�n', sol:'Analizamos reputaci�n - Cancelaci�n afecta la reputaci�n y m', res:1, csat:0.0 },
-  { proc:'Reputaci�n', sol:'Criterios reputaci�n - C�mo funciona la reputaci�n', res:1, csat:0.0 },
-  { proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo revisado', res:2, csat:50.0 },
-  { proc:'Reputaci�n', sol:'Experiencia de compra - Status de la publicaci�n', res:2, csat:50.0 },
-  { proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n y exclu', res:10, csat:80.0 },
-  { proc:'Reputaci�n ME', sol:'Reputaci�n ME Colecta XD: colecta pendiente', res:2, csat:50.0 },
-  { proc:'Reputaci�n ME', sol:'Reputaci�n: Consulta por HT s�bados y feriados (V)', res:1, csat:100.0 },
-  { proc:'Reputaci�n ME', sol:'Reputaci�n ME Ventas: Env�o no afecta al HT', res:1, csat:100.0 },
-  { proc:'Reputaci�n ME', sol:'Reputaci�n ME Ventas: Log�stica Flex - Excluimos', res:2, csat:100.0 },
-  { proc:'Reputaci�n ME', sol:'Reputaci�n ME Ventas: Vendedor newbie - Excluimos', res:1, csat:100.0 },
-  { proc:'Reputaci�n ME', sol:'Reputaci�n ME Ventas: Log�stica Cross Docking - Excluimos', res:2, csat:100.0 },
-  { proc:'Reputaci�n ME', sol:'Reputaci�n ME Ventas: Log�stica Places - Excluimos', res:1, csat:100.0 }
+  { proc:'PR - Técnica prohibida', sol:'Técnica prohibida - Rollback (reactivamos publicación)', res:1, csat:100.0 },
+  { proc:'Post Compra Funcionalidades Vendedor', sol:'Error en la mediación - Derivamos a MED', res:1, csat:100.0 },
+  { proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación por pro', res:1, csat:0.0 },
+  { proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación por pro', res:2, csat:0.0 },
+  { proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación por pro', res:1, csat:0.0 },
+  { proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación por pro', res:1, csat:0.0 },
+  { proc:'Reputación', sol:'Analizamos reputación - Cancelación afecta la reputación y m', res:1, csat:0.0 },
+  { proc:'Reputación', sol:'Criterios reputación - Cómo funciona la reputación', res:1, csat:0.0 },
+  { proc:'Reputación', sol:'Analizamos reputación - Reclamo revisado', res:2, csat:50.0 },
+  { proc:'Reputación', sol:'Experiencia de compra - Status de la publicación', res:2, csat:50.0 },
+  { proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación y exclu', res:10, csat:80.0 },
+  { proc:'Reputación ME', sol:'Reputación ME Colecta XD: colecta pendiente', res:2, csat:50.0 },
+  { proc:'Reputación ME', sol:'Reputación: Consulta por HT sábados y feriados (V)', res:1, csat:100.0 },
+  { proc:'Reputación ME', sol:'Reputación ME Ventas: Envío no afecta al HT', res:1, csat:100.0 },
+  { proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Flex - Excluimos', res:2, csat:100.0 },
+  { proc:'Reputación ME', sol:'Reputación ME Ventas: Vendedor newbie - Excluimos', res:1, csat:100.0 },
+  { proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Cross Docking - Excluimos', res:2, csat:100.0 },
+  { proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Places - Excluimos', res:1, csat:100.0 }
 ];
 
 const TLS = [
@@ -175,86 +175,86 @@ const INTRA_TODAY = [
 ];
 
 const DETRATORES_IND = [
-  { ldap:'lteixeira', tl:'lrossetto', proc:'Reputaci�n ME', sol:'Reputaci�n ME Ventas: Log�stica Flex - Excluimos', sc:5, canal:'C2C', km:'NEWBIE', dt:'03/08 11h54', cmt:'Leonardo foi um excelente profissional' },
-  { ldap:'vltrevizan', tl:'imsilva', proc:'Reputaci�n ME', sol:'Reputaci�n ME Ventas: Vendedor newbie - Excluimos', sc:5, canal:'C2C', km:'EXPERT', dt:'03/08 11h50', cmt:'' },
-  { ldap:'amcaldeira', tl:'thaidossanto', proc:'Reputaci�n', sol:'Experiencia de compra - Status de la publicaci�n', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 11h42', cmt:'' },
-  { ldap:'renataperei', tl:'isabmot', proc:'Reputaci�n ME', sol:'Reputaci�n ME Colecta XD: colecta pendiente', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 11h34', cmt:'' },
-  { ldap:'ulissouza', tl:'thaidossanto', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n y ', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 11h33', cmt:'' },
-  { ldap:'amcandido', tl:'isabmot', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n po', sc:2, canal:'CHAT', km:'EXPERT', dt:'03/08 11h32', cmt:'demorou muito e n�o resolveu nada' },
-  { ldap:'stdiniz', tl:'alicarvalho', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n po', sc:1, canal:'CHAT', km:'EXPERT', dt:'03/08 11h31', cmt:'Os clientes n�o precisam comprovar nada do que � dito, al�m disso o mercado livre ainda faz uma an�lise em cima desse na' },
-  { ldap:'amcandido', tl:'isabmot', proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Aprobamos factura y reactivamos', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 11h27', cmt:'atendente �timo , tudo �timo ' },
-  { ldap:'vdpiedade', tl:'bkaroline', proc:'Reputaci�n ME', sol:'Reputaci�n ME Ventas: Log�stica Cross Docking - Excluim', sc:4, canal:'CHAT', km:'EXPERT', dt:'03/08 11h20', cmt:'' },
-  { ldap:'aldmelo', tl:'bkaroline', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n y ', sc:2, canal:'CHAT', km:'EXPERT', dt:'03/08 11h07', cmt:'' },
-  { ldap:'cdoliveira', tl:'lrossetto', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n po', sc:1, canal:'C2C', km:'EXPERT', dt:'03/08 11h02', cmt:'Avaliia��o completamente equivocada feita pela atendente que n�o levou em considera��o as provas enviadas e se paltou ap' },
-  { ldap:'ulissouza', tl:'thaidossanto', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n y ', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 10h52', cmt:'' },
-  { ldap:'casbarreiros', tl:'thaidossanto', proc:'Reputaci�n', sol:'—', sc:1, canal:'CHAT', km:'EXPERT', dt:'03/08 10h51', cmt:'Me ignorou' },
-  { ldap:'casbarreiros', tl:'thaidossanto', proc:'Reputaci�n', sol:'Experiencia de compra - Status de la publicaci�n', sc:1, canal:'CHAT', km:'EXPERT', dt:'03/08 10h48', cmt:'' },
-  { ldap:'mrmarques', tl:'isabmot', proc:'PR - T�cnica prohibida', sol:'T�cnica prohibida - Rollback (reactivamos publicaci�n)', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 10h46', cmt:'' },
-  { ldap:'adysantos', tl:'lrossetto', proc:'Reputaci�n ME', sol:'Reputaci�n ME Ventas: Log�stica Flex - Excluimos', sc:5, canal:'C2C', km:'EXPERT', dt:'03/08 10h46', cmt:'Excelente atendimento, a jade foi bem atenciosa, esclareceu todas as d�vidas, e conseguiu resolver nosso problema, muito' },
-  { ldap:'renataperei', tl:'isabmot', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n y ', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 10h34', cmt:'' },
-  { ldap:'marguedes', tl:'alicarvalho', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n y ', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 10h31', cmt:'' },
-  { ldap:'csnunes', tl:'lrossetto', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n po', sc:2, canal:'C2C', km:'EXPERT', dt:'03/08 10h30', cmt:'' },
-  { ldap:'cafarias', tl:'alicarvalho', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n po', sc:1, canal:'CHAT', km:'EXPERT', dt:'03/08 10h29', cmt:'Foi um c�pia e cola da mesma coisa, pelo que percebi nem estava lendo minhas alega��es para analisar, pois mandei v�rias' },
-  { ldap:'vfonorio', tl:'isabmot', proc:'Reputaci�n ME', sol:'Reputaci�n ME Ventas: Log�stica Cross Docking - Excluim', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 10h23', cmt:'' },
-  { ldap:'bcunha', tl:'alicarvalho', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo revisado', sc:4, canal:'CHAT', km:'EXPERT', dt:'03/08 10h20', cmt:'' },
-  { ldap:'marlaraujo', tl:'alicarvalho', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n y ', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 09h33', cmt:'Presteza e rapidez! Foi resolvido meu problema. ' },
-  { ldap:'vfarias', tl:'alicarvalho', proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Quitamos la moderaci�n para rea', sc:1, canal:'CHAT', km:'EXPERT', dt:'03/08 09h26', cmt:'' },
-  { ldap:'vitnasciment', tl:'imsilva', proc:'Reputaci�n ME', sol:'Reputaci�n: Consulta por HT s�bados y feriados (V)', sc:5, canal:'C2C', km:'EXPERT', dt:'03/08 09h23', cmt:'Recebi orienta��es e me ajudou bastante. �timo' },
-  { ldap:'eduejesus', tl:'thaidossanto', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Cancelaci�n afecta la reputaci�', sc:2, canal:'CHAT', km:'NEWBIE', dt:'03/08 08h59', cmt:'N�o nos auxiliaram, apenas ouviram a opini�o do cliente. ' },
-  { ldap:'vltrevizan', tl:'imsilva', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n y ', sc:5, canal:'C2C', km:'EXPERT', dt:'03/08 08h59', cmt:'' },
-  { ldap:'casbarreiros', tl:'thaidossanto', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo revisado', sc:1, canal:'CHAT', km:'EXPERT', dt:'03/08 08h55', cmt:'IMPACTOS QUE DEVERIAM SEREM REMOVIDOS FORMA MANTIDOS E AINDA POR CIMA, ENCERRARAM O CASO. SEMPRE SENDO PREJUDICADO POR E' },
-  { ldap:'marlaraujo', tl:'alicarvalho', proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Aprobamos factura y reactivamos', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 08h51', cmt:'' },
-  { ldap:'vitnasciment', tl:'imsilva', proc:'Reputaci�n ME', sol:'Reputaci�n ME Ventas: Log�stica Places - Excluimos', sc:5, canal:'C2C', km:'EXPERT', dt:'03/08 08h45', cmt:'A mo�a que me atendeu chamada Vit�ria,  foi s� Vit�ria mesmo! Me auxiliou com excel�ncia. Em tantos anos que contatamos ' },
-  { ldap:'amcaldeira', tl:'thaidossanto', proc:'Reputaci�n', sol:'Criterios reputaci�n - C�mo funciona la reputaci�n', sc:1, canal:'CHAT', km:'EXPERT', dt:'03/08 08h39', cmt:'Entendem que ter 2 contas no mesmo CPF � contra a pol�tica do ML por�m informam claramente que n�o podem tomar nenhuma a' },
-  { ldap:'pmarinho', tl:'imsilva', proc:'Post Compra Funcionalidades Vendedor', sol:'Error en la mediaci�n - Derivamos a MED', sc:5, canal:'C2C', km:'EXPERT', dt:'03/08 08h38', cmt:'' },
-  { ldap:'gabrielaaiol', tl:'imsilva', proc:'Reputaci�n ME', sol:'Reputaci�n ME Colecta XD: colecta pendiente', sc:1, canal:'C2C', km:'EXPERT', dt:'03/08 08h33', cmt:'atendimento humano � bem melhor do que a IA pois as elas nunca entendem o que acontece, s� trabalham e cima das regras' },
-  { ldap:'bcunha', tl:'alicarvalho', proc:'Gesti�n de Publicaci�n', sol:'Modificar - Public� en cat�logo un producto diferente a', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 07h59', cmt:'Atendente resolveu e foi super atenciosa ' },
-  { ldap:'kperrone', tl:'thaidossanto', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n y ', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 07h53', cmt:'' },
-  { ldap:'vltrevizan', tl:'imsilva', proc:'Reputaci�n ME', sol:'Reputaci�n ME Ventas: Env�o no afecta al HT', sc:5, canal:'C2C', km:'EXPERT', dt:'03/08 07h44', cmt:'Muito bom!' },
-  { ldap:'kperrone', tl:'thaidossanto', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n y ', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 07h04', cmt:'' },
-  { ldap:'linessousa', tl:'imsilva', proc:'Reputaci�n', sol:'Analizamos reputaci�n - Reclamo afecta la reputaci�n y ', sc:2, canal:'C2C', km:'EXPERT', dt:'03/08 07h04', cmt:'' }
+  { caso:'8d108c93-82bb-47dc-863f-f521d479ef22', ldap:'lteixeira', tl:'lrossetto', proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Flex - Excluimos', sc:5, canal:'C2C', km:'NEWBIE', dt:'03/08 11h54', cmt:'Leonardo foi um excelente profissional' },
+  { caso:'25d87287-7267-4aae-833d-ff49d6f86207', ldap:'vltrevizan', tl:'imsilva', proc:'Reputación ME', sol:'Reputación ME Ventas: Vendedor newbie - Excluimos', sc:5, canal:'C2C', km:'EXPERT', dt:'03/08 11h50', cmt:'' },
+  { caso:'caa35459-b8c5-4d0f-8519-915788c11f89', ldap:'amcaldeira', tl:'thaidossanto', proc:'Reputación', sol:'Experiencia de compra - Status de la publicación', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 11h42', cmt:'' },
+  { caso:'e53149e1-3930-43b6-af31-f6d882c1d0f5', ldap:'renataperei', tl:'isabmot', proc:'Reputación ME', sol:'Reputación ME Colecta XD: colecta pendiente', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 11h34', cmt:'' },
+  { caso:'a085b441-70aa-4762-8435-807d9e95ff64', ldap:'ulissouza', tl:'thaidossanto', proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación y ', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 11h33', cmt:'' },
+  { caso:'354ace1d-3a7e-4df3-826a-8d6bc562ad79', ldap:'amcandido', tl:'isabmot', proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación po', sc:2, canal:'CHAT', km:'EXPERT', dt:'03/08 11h32', cmt:'demorou muito e não resolveu nada' },
+  { caso:'29b58b54-e2b3-4ea6-b6eb-9f2cc47f05a3', ldap:'stdiniz', tl:'alicarvalho', proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación po', sc:1, canal:'CHAT', km:'EXPERT', dt:'03/08 11h31', cmt:'Os clientes não precisam comprovar nada do que é dito, além disso o mercado livre ainda faz uma análise em cima desse na' },
+  { caso:'e1ab44d0-60f4-446a-8af8-4952accc287c', ldap:'amcandido', tl:'isabmot', proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Aprobamos factura y reactivamos', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 11h27', cmt:'atendente ótimo , tudo ótimo ' },
+  { caso:'bb81f383-ff39-4dc3-8d7e-5510291c2cf8', ldap:'vdpiedade', tl:'bkaroline', proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Cross Docking - Excluim', sc:4, canal:'CHAT', km:'EXPERT', dt:'03/08 11h20', cmt:'' },
+  { caso:'cc994958-ea90-436e-9189-68803fe8688b', ldap:'aldmelo', tl:'bkaroline', proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación y ', sc:2, canal:'CHAT', km:'EXPERT', dt:'03/08 11h07', cmt:'' },
+  { caso:'f5c0621d-6e5f-495c-8e72-6030b228dcf2', ldap:'cdoliveira', tl:'lrossetto', proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación po', sc:1, canal:'C2C', km:'EXPERT', dt:'03/08 11h02', cmt:'Avaliiação completamente equivocada feita pela atendente que não levou em consideração as provas enviadas e se paltou ap' },
+  { caso:'5853a1bc-c480-413a-b01f-8d9929a5dfd4', ldap:'ulissouza', tl:'thaidossanto', proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación y ', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 10h52', cmt:'' },
+  { caso:'a5eaffb4-1035-4f06-88e9-046f2b8ea854', ldap:'casbarreiros', tl:'thaidossanto', proc:'Reputación', sol:'—', sc:1, canal:'CHAT', km:'EXPERT', dt:'03/08 10h51', cmt:'Me ignorou' },
+  { caso:'b65922e4-6aed-409c-a8f4-25ce1eea0899', ldap:'casbarreiros', tl:'thaidossanto', proc:'Reputación', sol:'Experiencia de compra - Status de la publicación', sc:1, canal:'CHAT', km:'EXPERT', dt:'03/08 10h48', cmt:'' },
+  { caso:'4ecd14f2-58e5-4be4-acef-3277fa602f2a', ldap:'mrmarques', tl:'isabmot', proc:'PR - Técnica prohibida', sol:'Técnica prohibida - Rollback (reactivamos publicación)', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 10h46', cmt:'' },
+  { caso:'ec56df91-3782-4104-a806-a98cd0ec5c37', ldap:'adysantos', tl:'lrossetto', proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Flex - Excluimos', sc:5, canal:'C2C', km:'EXPERT', dt:'03/08 10h46', cmt:'Excelente atendimento, a jade foi bem atenciosa, esclareceu todas as dúvidas, e conseguiu resolver nosso problema, muito' },
+  { caso:'a6430981-eeab-4849-a88d-217346b78d4c', ldap:'renataperei', tl:'isabmot', proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación y ', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 10h34', cmt:'' },
+  { caso:'8f0ef45a-b905-4557-b9a8-808f6984294b', ldap:'marguedes', tl:'alicarvalho', proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación y ', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 10h31', cmt:'' },
+  { caso:'e5ee26cc-bbeb-4e4d-bfde-e6f2f293bbec', ldap:'csnunes', tl:'lrossetto', proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación po', sc:2, canal:'C2C', km:'EXPERT', dt:'03/08 10h30', cmt:'' },
+  { caso:'18302150-f8f6-48dd-b0d0-528be0fb0acd', ldap:'cafarias', tl:'alicarvalho', proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación po', sc:1, canal:'CHAT', km:'EXPERT', dt:'03/08 10h29', cmt:'Foi um cópia e cola da mesma coisa, pelo que percebi nem estava lendo minhas alegações para analisar, pois mandei várias' },
+  { caso:'085f5099-04f6-4c60-81f2-0923482b80c4', ldap:'vfonorio', tl:'isabmot', proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Cross Docking - Excluim', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 10h23', cmt:'' },
+  { caso:'68d8809d-2ca8-4930-99ac-3b589abf351d', ldap:'bcunha', tl:'alicarvalho', proc:'Reputación', sol:'Analizamos reputación - Reclamo revisado', sc:4, canal:'CHAT', km:'EXPERT', dt:'03/08 10h20', cmt:'' },
+  { caso:'e1610aa7-b202-4302-95d3-0056134dfc0b', ldap:'marlaraujo', tl:'alicarvalho', proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación y ', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 09h33', cmt:'Presteza e rapidez! Foi resolvido meu problema. ' },
+  { caso:'8be30d03-ceb8-4fc9-9017-80e7d981a6e9', ldap:'vfarias', tl:'alicarvalho', proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Quitamos la moderación para rea', sc:1, canal:'CHAT', km:'EXPERT', dt:'03/08 09h26', cmt:'' },
+  { caso:'618f7a2d-7424-4abb-b807-7158960c31d9', ldap:'vitnasciment', tl:'imsilva', proc:'Reputación ME', sol:'Reputación: Consulta por HT sábados y feriados (V)', sc:5, canal:'C2C', km:'EXPERT', dt:'03/08 09h23', cmt:'Recebi orientações e me ajudou bastante. Ótimo' },
+  { caso:'f0a2c1f6-59a0-45ee-98bd-844df78cfe7b', ldap:'eduejesus', tl:'thaidossanto', proc:'Reputación', sol:'Analizamos reputación - Cancelación afecta la reputació', sc:2, canal:'CHAT', km:'NEWBIE', dt:'03/08 08h59', cmt:'Não nos auxiliaram, apenas ouviram a opinião do cliente. ' },
+  { caso:'b9116288-e9e7-4377-b130-6278efb7cd19', ldap:'vltrevizan', tl:'imsilva', proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación y ', sc:5, canal:'C2C', km:'EXPERT', dt:'03/08 08h59', cmt:'' },
+  { caso:'64d5542e-c3e7-4846-bafa-939cece8c48d', ldap:'casbarreiros', tl:'thaidossanto', proc:'Reputación', sol:'Analizamos reputación - Reclamo revisado', sc:1, canal:'CHAT', km:'EXPERT', dt:'03/08 08h55', cmt:'IMPACTOS QUE DEVERIAM SEREM REMOVIDOS FORMA MANTIDOS E AINDA POR CIMA, ENCERRARAM O CASO. SEMPRE SENDO PREJUDICADO POR E' },
+  { caso:'2aea6835-fdf1-4da1-929b-163fc948c104', ldap:'marlaraujo', tl:'alicarvalho', proc:'PR - Propiedad intelectual', sol:'Propiedad Intelectual - Aprobamos factura y reactivamos', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 08h51', cmt:'' },
+  { caso:'193daaa8-9b19-4332-81e1-1b4d14f53b1a', ldap:'vitnasciment', tl:'imsilva', proc:'Reputación ME', sol:'Reputación ME Ventas: Logística Places - Excluimos', sc:5, canal:'C2C', km:'EXPERT', dt:'03/08 08h45', cmt:'A moça que me atendeu chamada Vitória,  foi só Vitória mesmo! Me auxiliou com excelência. Em tantos anos que contatamos ' },
+  { caso:'46a96e48-8d82-4655-841e-6b9080c27586', ldap:'amcaldeira', tl:'thaidossanto', proc:'Reputación', sol:'Criterios reputación - Cómo funciona la reputación', sc:1, canal:'CHAT', km:'EXPERT', dt:'03/08 08h39', cmt:'Entendem que ter 2 contas no mesmo CPF é contra a política do ML porém informam claramente que não podem tomar nenhuma a' },
+  { caso:'0a9afaa7-0c51-4c5b-945a-944de830afb5', ldap:'pmarinho', tl:'imsilva', proc:'Post Compra Funcionalidades Vendedor', sol:'Error en la mediación - Derivamos a MED', sc:5, canal:'C2C', km:'EXPERT', dt:'03/08 08h38', cmt:'' },
+  { caso:'d7fc7606-e9f3-4d7b-a35b-1ceeffa7ccc0', ldap:'gabrielaaiol', tl:'imsilva', proc:'Reputación ME', sol:'Reputación ME Colecta XD: colecta pendiente', sc:1, canal:'C2C', km:'EXPERT', dt:'03/08 08h33', cmt:'atendimento humano é bem melhor do que a IA pois as elas nunca entendem o que acontece, só trabalham e cima das regras' },
+  { caso:'30e77262-8fec-486b-b577-464f5df55333', ldap:'bcunha', tl:'alicarvalho', proc:'Gestión de Publicación', sol:'Modificar - Publicó en catálogo un producto diferente a', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 07h59', cmt:'Atendente resolveu e foi super atenciosa ' },
+  { caso:'118aea31-8547-4e45-b6e8-a7cc1e0a2b61', ldap:'kperrone', tl:'thaidossanto', proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación y ', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 07h53', cmt:'' },
+  { caso:'0f11620a-9253-478e-bb88-cc218d5390d8', ldap:'vltrevizan', tl:'imsilva', proc:'Reputación ME', sol:'Reputación ME Ventas: Envío no afecta al HT', sc:5, canal:'C2C', km:'EXPERT', dt:'03/08 07h44', cmt:'Muito bom!' },
+  { caso:'6ef7f992-e9cc-413f-8638-be28550ac50f', ldap:'kperrone', tl:'thaidossanto', proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación y ', sc:5, canal:'CHAT', km:'EXPERT', dt:'03/08 07h04', cmt:'' },
+  { caso:'b15bf6f3-bff4-4ba5-99e8-bdc1357c46c1', ldap:'linessousa', tl:'imsilva', proc:'Reputación', sol:'Analizamos reputación - Reclamo afecta la reputación y ', sc:2, canal:'C2C', km:'EXPERT', dt:'03/08 07h04', cmt:'' }
 ];
 
 const AGENTE_PROC = [
-  { ldap:'adysantos', proc:'Reputaci�n ME', res:1, csat:100.0, dets:0 },
-  { ldap:'aldmelo', proc:'Reputaci�n', res:1, csat:0.0, dets:1 },
-  { ldap:'amcaldeira', proc:'Reputaci�n', res:2, csat:50.0, dets:1 },
-  { ldap:'amcandido', proc:'Reputaci�n', res:1, csat:0.0, dets:1 },
+  { ldap:'adysantos', proc:'Reputación ME', res:1, csat:100.0, dets:0 },
+  { ldap:'aldmelo', proc:'Reputación', res:1, csat:0.0, dets:1 },
+  { ldap:'amcaldeira', proc:'Reputación', res:2, csat:50.0, dets:1 },
+  { ldap:'amcandido', proc:'Reputación', res:1, csat:0.0, dets:1 },
   { ldap:'amcandido', proc:'PR - Propiedad intelectual', res:1, csat:100.0, dets:0 },
-  { ldap:'bcunha', proc:'Reputaci�n', res:1, csat:100.0, dets:0 },
-  { ldap:'bcunha', proc:'Gesti�n de Publicaci�n', res:1, csat:100.0, dets:0 },
-  { ldap:'cafarias', proc:'Reputaci�n', res:1, csat:0.0, dets:1 },
-  { ldap:'casbarreiros', proc:'Reputaci�n', res:3, csat:0.0, dets:3 },
-  { ldap:'cdoliveira', proc:'Reputaci�n', res:1, csat:0.0, dets:1 },
-  { ldap:'csnunes', proc:'Reputaci�n', res:1, csat:0.0, dets:1 },
-  { ldap:'eduejesus', proc:'Reputaci�n', res:1, csat:0.0, dets:1 },
-  { ldap:'gabrielaaiol', proc:'Reputaci�n ME', res:1, csat:0.0, dets:1 },
-  { ldap:'kperrone', proc:'Reputaci�n', res:2, csat:100.0, dets:0 },
-  { ldap:'linessousa', proc:'Reputaci�n', res:1, csat:0.0, dets:1 },
-  { ldap:'lteixeira', proc:'Reputaci�n ME', res:1, csat:100.0, dets:0 },
-  { ldap:'marguedes', proc:'Reputaci�n', res:1, csat:100.0, dets:0 },
-  { ldap:'marlaraujo', proc:'Reputaci�n', res:1, csat:100.0, dets:0 },
+  { ldap:'bcunha', proc:'Reputación', res:1, csat:100.0, dets:0 },
+  { ldap:'bcunha', proc:'Gestión de Publicación', res:1, csat:100.0, dets:0 },
+  { ldap:'cafarias', proc:'Reputación', res:1, csat:0.0, dets:1 },
+  { ldap:'casbarreiros', proc:'Reputación', res:3, csat:0.0, dets:3 },
+  { ldap:'cdoliveira', proc:'Reputación', res:1, csat:0.0, dets:1 },
+  { ldap:'csnunes', proc:'Reputación', res:1, csat:0.0, dets:1 },
+  { ldap:'eduejesus', proc:'Reputación', res:1, csat:0.0, dets:1 },
+  { ldap:'gabrielaaiol', proc:'Reputación ME', res:1, csat:0.0, dets:1 },
+  { ldap:'kperrone', proc:'Reputación', res:2, csat:100.0, dets:0 },
+  { ldap:'linessousa', proc:'Reputación', res:1, csat:0.0, dets:1 },
+  { ldap:'lteixeira', proc:'Reputación ME', res:1, csat:100.0, dets:0 },
+  { ldap:'marguedes', proc:'Reputación', res:1, csat:100.0, dets:0 },
+  { ldap:'marlaraujo', proc:'Reputación', res:1, csat:100.0, dets:0 },
   { ldap:'marlaraujo', proc:'PR - Propiedad intelectual', res:1, csat:100.0, dets:0 },
-  { ldap:'mrmarques', proc:'PR - T�cnica prohibida', res:1, csat:100.0, dets:0 },
+  { ldap:'mrmarques', proc:'PR - Técnica prohibida', res:1, csat:100.0, dets:0 },
   { ldap:'pmarinho', proc:'Post Compra Funcionalidades Vendedor', res:1, csat:100.0, dets:0 },
-  { ldap:'renataperei', proc:'Reputaci�n', res:1, csat:100.0, dets:0 },
-  { ldap:'renataperei', proc:'Reputaci�n ME', res:1, csat:100.0, dets:0 },
-  { ldap:'stdiniz', proc:'Reputaci�n', res:1, csat:0.0, dets:1 },
-  { ldap:'ulissouza', proc:'Reputaci�n', res:2, csat:100.0, dets:0 },
-  { ldap:'vdpiedade', proc:'Reputaci�n ME', res:1, csat:100.0, dets:0 },
+  { ldap:'renataperei', proc:'Reputación', res:1, csat:100.0, dets:0 },
+  { ldap:'renataperei', proc:'Reputación ME', res:1, csat:100.0, dets:0 },
+  { ldap:'stdiniz', proc:'Reputación', res:1, csat:0.0, dets:1 },
+  { ldap:'ulissouza', proc:'Reputación', res:2, csat:100.0, dets:0 },
+  { ldap:'vdpiedade', proc:'Reputación ME', res:1, csat:100.0, dets:0 },
   { ldap:'vfarias', proc:'PR - Propiedad intelectual', res:1, csat:0.0, dets:1 },
-  { ldap:'vfonorio', proc:'Reputaci�n ME', res:1, csat:100.0, dets:0 },
-  { ldap:'vitnasciment', proc:'Reputaci�n ME', res:2, csat:100.0, dets:0 },
-  { ldap:'vltrevizan', proc:'Reputaci�n ME', res:2, csat:100.0, dets:0 },
-  { ldap:'vltrevizan', proc:'Reputaci�n', res:1, csat:100.0, dets:0 }
+  { ldap:'vfonorio', proc:'Reputación ME', res:1, csat:100.0, dets:0 },
+  { ldap:'vitnasciment', proc:'Reputación ME', res:2, csat:100.0, dets:0 },
+  { ldap:'vltrevizan', proc:'Reputación ME', res:2, csat:100.0, dets:0 },
+  { ldap:'vltrevizan', proc:'Reputación', res:1, csat:100.0, dets:0 }
 ];
 
 const PROMO_DET = [
-  { proc:'Reputaci�n', promo:10, det:12, total:22, csat:45.5 },
+  { proc:'Reputación', promo:10, det:12, total:22, csat:45.5 },
   { proc:'PR - Propiedad intelectual', promo:2, det:1, total:3, csat:66.7 },
-  { proc:'Reputaci�n ME', promo:9, det:1, total:10, csat:90.0 },
-  { proc:'PR - T�cnica prohibida', promo:1, det:0, total:1, csat:100.0 },
-  { proc:'Gesti�n de Publicaci�n', promo:1, det:0, total:1, csat:100.0 },
+  { proc:'Reputación ME', promo:9, det:1, total:10, csat:90.0 },
+  { proc:'PR - Técnica prohibida', promo:1, det:0, total:1, csat:100.0 },
+  { proc:'Gestión de Publicación', promo:1, det:0, total:1, csat:100.0 },
   { proc:'Post Compra Funcionalidades Vendedor', promo:1, det:0, total:1, csat:100.0 }
 ];
 
@@ -500,7 +500,7 @@ function csatTxt(v){   return v>=80?'#173404':v>=60?'#633806':'#4A1B0C' }
   <div class="card" style="overflow-x:auto">
     <table class="tbl">
       <thead><tr>
-        <th>Data/Hora</th><th>Agente</th><th>TL</th><th>Canal</th><th>Processo</th><th>Solução</th><th>Nota</th><th>Comentário do cliente</th>
+        <th>Caso</th><th>Data/Hora</th><th>Agente</th><th>TL</th><th>Canal</th><th>Processo</th><th>Solução</th><th>Nota</th><th>Comentário do cliente</th>
       </tr></thead>
       <tbody id="casos-tbl"></tbody>
     </table>
@@ -540,7 +540,7 @@ function csatTxt(v){   return v>=80?'#173404':v>=60?'#633806':'#4A1B0C' }
     <div class="card">
       <div class="card-title">Lista individual — notas 1 e 2 <span id="det-count"></span></div>
       <table class="tbl" style="margin-top:6px">
-        <thead><tr><th>Agente</th><th>TL</th><th>Canal</th><th>Processo</th><th>Nota</th><th>Horário</th></tr></thead>
+        <thead><tr><th>Caso</th><th>Agente</th><th>TL</th><th>Canal</th><th>Processo</th><th>Nota</th><th>Horário</th></tr></thead>
         <tbody id="det-ind-tbody"></tbody>
       </table>
     </div>
@@ -952,6 +952,7 @@ function renderCasos(){
   if(fv==='pro') arr = arr.filter(d=>d.sc>=4);
   document.getElementById('casos-count').textContent = arr.length+' casos';
   document.getElementById('casos-tbl').innerHTML = arr.map(d=>`<tr>
+    <td style="font-size:10px;color:#888780;white-space:nowrap;font-family:monospace">${d.caso||'—'}</td>
     <td style="white-space:nowrap;font-size:11px;color:#888780">${d.dt}</td>
     <td style="font-weight:700">${d.ldap}</td>
     <td style="font-size:11px;color:#5F5E5A">${TL_NAMES[d.tl]||d.tl}</td>
@@ -975,6 +976,7 @@ function renderDetratores(){
 
   // Lista individual de detratores
   document.getElementById('det-ind-tbody').innerHTML = dets.map(d=>`<tr>
+    <td style="font-size:10px;color:#888780;white-space:nowrap;font-family:monospace">${d.caso||'—'}</td>
     <td style="font-weight:700">${d.ldap}</td>
     <td style="font-size:11px;color:#5F5E5A">${TL_NAMES[d.tl]||d.tl}</td>
     <td><span class="tag ${d.canal.toLowerCase()}">${d.canal}</span></td>
