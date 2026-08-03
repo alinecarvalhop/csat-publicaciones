@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSAT · Publicações Sellers Mature · MLB</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#F8F7F4;color:#2C2C2A;font-size:14px}
+canvas{display:block}
+.header{background:#FAC725;padding:16px 24px;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.header-left h1{font-size:20px;font-weight:800;color:#412402;line-height:1.2}
+.header-left .sub{font-size:12px;color:#633806;font-weight:600;margin-top:2px}
+.header-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.badge{padding:4px 12px;border-radius:99px;font-size:11px;font-weight:700;background:#fff;color:#412402}
+.badge.warn{background:#FAECE7;color:#993C1D;border:1px solid #F5C4B3}
+.badge.pulse-wrap{display:flex;align-items:center;gap:6px;background:#26215C;color:#9FE1CB}
+.pulse{width:7px;height:7px;border-radius:50%;background:#9FE1CB;display:inline-block;animation:pls 1.4s infinite}
+@keyframes pls{0%,100%{opacity:1}50%{opacity:.25}}
+.kpi-bar{background:#fff;border-bottom:1px solid #E0DFD7;display:flex;flex-wrap:wrap;padding:0}
+.kpi-cell{padding:14px 20px;border-right:1px solid #E0DFD7;flex:1;min-width:120px}
+.kpi-cell:last-child{border-right:none}
+.kv{font-size:26px;font-weight:900;color:#2C2C2A;line-height:1}
+.kv.green{color:#1D9E75}.kv.amber{color:#D4830A}.kv.red{color:#C84B00}
+.kl{font-size:11px;color:#5F5E5A;font-weight:600;margin-top:3px}
+.kd{font-size:12px;margin-top:4px;font-weight:700}
+.kd.up{color:#1D9E75}.kd.down{color:#C84B00}.kd.neu{color:#888780}
+.alert-banner{background:#FAEEDA;border-left:4px solid #EF9F27;padding:10px 24px;font-size:12px;color:#633806;font-weight:600;display:flex;gap:8px;align-items:center}
+.tabs{background:#fff;border-bottom:2px solid #E0DFD7;display:flex;overflow-x:auto;padding:0 16px;gap:0}
+.tab{padding:12px 18px;font-size:13px;font-weight:700;color:#888780;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:color .15s,border-color .15s}
+.tab:hover{color:#412402}.tab.active{color:#412402;border-bottom-color:#FAC725}
+.panel{display:none;padding:20px 24px;max-width:1100px;margin:0 auto}.panel.active{display:block}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.card{background:#fff;border-radius:12px;border:1px solid #E0DFD7;padding:16px 18px}
+.card-title{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:#888780;margin-bottom:12px}
+.card-title span{font-weight:600;text-transform:none;font-size:11px;color:#B5B3AC;margin-left:6px;letter-spacing:0}
+.sec-title{font-size:13px;font-weight:800;color:#412402;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.sec-title .pill{font-size:10px;padding:2px 8px;border-radius:99px;font-weight:700;background:#F1EFE8;color:#5F5E5A}
+.csat-bar-wrap{display:flex;align-items:center;gap:8px}
+.csat-bar-bg{flex:1;background:#F1EFE8;border-radius:99px;height:8px;overflow:hidden}
+.csat-bar-fill{height:100%;border-radius:99px;transition:width .4s}
+.csat-val{font-size:12px;font-weight:800;min-width:38px;text-align:right}
+.score-row{display:flex;align-items:center;gap:8px;padding:4px 0}
+.score-emoji{font-size:18px;width:28px;text-align:center;flex-shrink:0}
+.score-label{font-size:11px;color:#5F5E5A;width:50px;flex-shrink:0}
+.score-bar-bg{flex:1;background:#F1EFE8;border-radius:4px;height:18px;overflow:hidden}
+.score-bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:6px;font-size:11px;font-weight:800;color:#fff;transition:width .4s}
+.score-count{font-size:12px;font-weight:800;min-width:28px;text-align:right;color:#5F5E5A}
+.score-pct{font-size:11px;color:#B5B3AC;min-width:36px;text-align:right}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{font-size:11px;font-weight:800;color:#888780;text-transform:uppercase;letter-spacing:.4px;padding:8px 10px;border-bottom:2px solid #E0DFD7;text-align:left}
+.tbl td{padding:8px 10px;border-bottom:1px solid #F1EFE8;font-size:13px;vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:#FAFAF8}
+.tbl .tag{padding:2px 8px;border-radius:5px;font-size:10px;font-weight:700;display:inline-block}
+.tag.expert{background:#E6F1FB;color:#042C53}.tag.newbie{background:#FAEEDA;color:#633806}
+.tag.alerta{background:#FAECE7;color:#993C1D}.tag.ok{background:#EAF3DE;color:#173404}
+.tbl-bar{display:flex;align-items:center;gap:6px}
+.tbl-bar-bg{width:80px;background:#F1EFE8;border-radius:3px;height:6px;overflow:hidden;flex-shrink:0}
+.tbl-bar-fill{height:100%;border-radius:3px}
+.insight{border-radius:10px;padding:12px 14px;margin-bottom:10px;display:flex;gap:10px;align-items:flex-start}
+.insight.red{background:#FAECE7;border-left:3px solid #C84B00}
+.insight.amber{background:#FAEEDA;border-left:3px solid #EF9F27}
+.insight.green{background:#EAF3DE;border-left:3px solid #1D9E75}
+.insight.blue{background:#E6F1FB;border-left:3px solid #378ADD}
+.insight-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.insight-text{font-size:12px;font-weight:600;line-height:1.5;color:#2C2C2A}
+.insight-text strong{font-weight:800}
+.chart-wrap{position:relative;height:220px;margin-top:4px}
+.chart-wrap.sm{height:160px}
+.footer{text-align:center;padding:20px;font-size:11px;color:#B5B3AC;border-top:1px solid #E0DFD7;margin-top:24px}
+</style>
+</head>
+<body>
+
+<!-- ========== DADOS ========== -->
+<script>
+const ATU = '3 ago 2026 · 09h · MLB apenas';
+
+const DAILY = [
+  { dia:'01/Ago', env:4,   res:0,  csat:null, taxa:0.0  },
+  { dia:'02/Ago', env:4,   res:0,  csat:null, taxa:0.0  },
+  { dia:'03/Ago', env:216, res:15, csat:60.0, taxa:6.9  },
+];
+
+const SCORES = [4, 2, 0, 0, 9]; // n1..n5
+
+const CANAL = [
+  { lbl:'C2C · Expert',   res:7, csat:71.4, n:[1,1,0,0,5] },
+  { lbl:'CHAT · Expert',  res:7, csat:57.1, n:[3,0,0,0,4] },
+  { lbl:'CHAT · Newbie',  res:1, csat:0.0,  n:[0,1,0,0,0] },
+];
+
+const PROCESSO = [
+  { proc:'Reputación',                        res:7, csat:42.9 },
+  { proc:'PR - Propiedad intelectual',        res:2, csat:50.0 },
+  { proc:'Reputación ME',                     res:4, csat:75.0 },
+  { proc:'Gestión de Publicación',            res:1, csat:100.0 },
+  { proc:'Post Compra Func. Vendedor',        res:1, csat:100.0 },
+];
+
+const SOLUCOES = [
+  { proc:'Reputación', sol:'Reclamo revisado',                res:1, csat:0.0   },
+  { proc:'Reputación', sol:'Cancelación afecta — mantenemos', res:1, csat:0.0   },
+  { proc:'Reputación', sol:'Cómo funciona la reputación',     res:1, csat:0.0   },
+  { proc:'Reputación', sol:'Reclamo afecta — excluimos',      res:4, csat:75.0  },
+  { proc:'PR - Propiedad intelectual', sol:'Quitamos moderación (Rollback)', res:1, csat:0.0   },
+  { proc:'PR - Propiedad intelectual', sol:'Aprobamos factura y reactivamos',res:1, csat:100.0 },
+  { proc:'Reputación ME', sol:'Colecta XD pendiente',          res:1, csat:0.0   },
+  { proc:'Reputación ME', sol:'Logística Places — excluimos',  res:1, csat:100.0 },
+  { proc:'Reputación ME', sol:'Consulta HT sábados/feriados',  res:1, csat:100.0 },
+  { proc:'Reputación ME', sol:'Envío no afecta HT',            res:1, csat:100.0 },
+  { proc:'Gestión de Publicación', sol:'Publicó en catálogo — producto diferente', res:1, csat:100.0 },
+  { proc:'Post Compra Func. Vendedor', sol:'Error mediación — derivamos MED', res:1, csat:100.0 },
+];
+
+const TLS = [
+  { tl:'thaidossanto', nome:'Thais',  res:5, csat:40.0, dets:3 },
+  { tl:'alicarvalho',  nome:'Aline',  res:3, csat:66.7, dets:1 },
+  { tl:'imsilva',      nome:'Ivan',   res:7, csat:71.4, dets:2 },
+];
+
+const AGENTES = [
+  { ldap:'linessousa',   tl:'imsilva',      km:'EXPERT', res:1, csat:0.0,   sc:2.0, dets:1 },
+  { ldap:'vfarias',      tl:'alicarvalho',  km:'EXPERT', res:1, csat:0.0,   sc:1.0, dets:1 },
+  { ldap:'casbarreiros', tl:'thaidossanto', km:'EXPERT', res:1, csat:0.0,   sc:1.0, dets:1 },
+  { ldap:'amcaldeira',   tl:'thaidossanto', km:'EXPERT', res:1, csat:0.0,   sc:1.0, dets:1 },
+  { ldap:'eduejesus',    tl:'thaidossanto', km:'NEWBIE', res:1, csat:0.0,   sc:2.0, dets:1 },
+  { ldap:'gabrielaaiol', tl:'imsilva',      km:'EXPERT', res:1, csat:0.0,   sc:1.0, dets:1 },
+  { ldap:'vltrevizan',   tl:'imsilva',      km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'kperrone',     tl:'thaidossanto', km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'vitnasciment', tl:'imsilva',      km:'EXPERT', res:2, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'marlaraujo',   tl:'alicarvalho',  km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'bcunha',       tl:'alicarvalho',  km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
+  { ldap:'pmarinho',     tl:'imsilva',      km:'EXPERT', res:1, csat:100.0, sc:5.0, dets:0 },
+];
+
+const INTRA_TODAY = [
+  { h:'07h', res:5,  csat:80.0, det:1 },
+  { h:'08h', res:8,  csat:50.0, det:4 },
+  { h:'09h', res:2,  csat:50.0, det:1 },
+];
+
+function pct(v){ return v!=null ? v.toFixed(1)+'%' : '—' }
+function csatColor(v){ return v>=80?'#1D9E75':v>=60?'#D4830A':'#C84B00' }
+function csatBg(v){    return v>=80?'#EAF3DE':v>=60?'#FAEEDA':'#FAECE7' }
+function csatTxt(v){   return v>=80?'#173404':v>=60?'#633806':'#4A1B0C' }
+</script>
+
+<!-- ========== HEADER ========== -->
+<div class="header">
+  <div class="header-left">
+    <h1>CSAT · Publicações Sellers Mature</h1>
+    <div class="sub">MLB apenas · BR_Publicaciones_Sellers_Mature · Agosto 2026</div>
+  </div>
+  <div class="header-right">
+    <div class="badge pulse-wrap"><span class="pulse"></span>NRT ~30min</div>
+    <div class="badge warn">⚠ Sem target até out/2026</div>
+    <div class="badge" id="atu-badge"></div>
+  </div>
+</div>
+
+<!-- ========== KPI BAR ========== -->
+<div class="kpi-bar">
+  <div class="kpi-cell">
+    <div class="kv red">60,0%</div>
+    <div class="kl">CSAT agosto/MLB (3/ago)</div>
+    <div class="kd neu">1º dia com dados reais</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="kv">15</div>
+    <div class="kl">Total respondidas</div>
+    <div class="kd neu">de 224 enviadas desde 01/ago</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="kv">216</div>
+    <div class="kl">Pesquisas enviadas hoje</div>
+    <div class="kd neu">6,9% de resposta</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="kv red">6</div>
+    <div class="kl">Detratores (notas 1–2)</div>
+    <div class="kd down">40% das respostas</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="kv green">9</div>
+    <div class="kl">Satisfeitos (nota 5)</div>
+    <div class="kd up">60% das respostas</div>
+  </div>
+</div>
+
+<!-- ========== ALERT ========== -->
+<div class="alert-banner">
+  ⚠ Amostra extremamente pequena — 15 respostas, todas de 03/ago. 01/ago e 02/ago: 0 respostas (apenas 4 pesquisas enviadas em cada dia). Os percentuais oscilam muito nesta fase inicial.
+</div>
+
+<!-- ========== TABS ========== -->
+<div class="tabs">
+  <div class="tab active" onclick="setTab(0)">📊 Visão Geral</div>
+  <div class="tab" onclick="setTab(1)">📡 Canal · Senioridade</div>
+  <div class="tab" onclick="setTab(2)">🗂 Processo</div>
+  <div class="tab" onclick="setTab(3)">👥 TLs</div>
+  <div class="tab" onclick="setTab(4)">🧑 Agentes</div>
+  <div class="tab" onclick="setTab(5)">⚡ Intradiário</div>
+</div>
+
+<!-- TAB 0 — VISÃO GERAL -->
+<div class="panel active" id="p0">
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">Pesquisas agosto · MLB <span>enviadas vs respondidas</span></div>
+      <div class="chart-wrap"><canvas id="ch-trend"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Distribuição de notas <span>15 respostas · 03/ago · MLB</span></div>
+      <div id="score-dist" style="margin-top:8px"></div>
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid #F1EFE8;display:flex;gap:16px;flex-wrap:wrap">
+        <div><span style="font-size:18px;font-weight:900;color:#1D9E75">60,0%</span><span style="font-size:11px;color:#5F5E5A;margin-left:4px">satisfeitos (nota 5)</span></div>
+        <div><span style="font-size:18px;font-weight:900;color:#C84B00">40,0%</span><span style="font-size:11px;color:#5F5E5A;margin-left:4px">detratores (notas 1–2)</span></div>
+        <div><span style="font-size:14px;font-weight:900;color:#888780">0%</span><span style="font-size:11px;color:#5F5E5A;margin-left:4px">neutros (3–4)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-title">Principais achados <span class="pill">03/ago · MLB · n=15</span></div>
+
+  <div class="insight red">
+    <div class="insight-icon">🚨</div>
+    <div class="insight-text"><strong>Distribuição bimodal extrema:</strong> 9 notas 5 e 6 notas 1–2. Zero notas 3 ou 4. Sellers saem ou muito satisfeitos ou muito insatisfeitos — não há meio-termo. Isso sugere que o tipo de problema resolvido é o diferenciador.</div>
+  </div>
+  <div class="insight red">
+    <div class="insight-icon">⚠</div>
+    <div class="insight-text"><strong>ML Vendedor sem tipificação (55,6%):</strong> 9 das 15 respostas são desse processo, sem tipif. preenchida. Maior grupo e CSAT abaixo da média. Monitorar preenchimento de tipificação.</div>
+  </div>
+  <div class="insight amber">
+    <div class="insight-icon">📉</div>
+    <div class="insight-text"><strong>CHAT performando pior que C2C:</strong> CHAT Expert 57,1% vs C2C Expert 71,4%. Sellers no chat ficam mais insatisfeitos — pode ser tempo de espera, qualidade de resposta ou tipo de caso.</div>
+  </div>
+  <div class="insight amber">
+    <div class="insight-icon">👥</div>
+    <div class="insight-text"><strong>Thais com maior concentração de detratores (3):</strong> 5 respostas, CSAT 40%, 3 detratores — sendo amcaldeira, casbarreiros e eduejesus todos com nota 1–2.</div>
+  </div>
+  <div class="insight blue">
+    <div class="insight-icon">📊</div>
+    <div class="insight-text"><strong>Volume muito baixo:</strong> 01/ago e 02/ago tinham apenas 4 pesquisas enviadas por dia — motor ainda calibrando. 03/ago subiu para 216. Aguardar estabilização no volume para diagnósticos definitivos.</div>
+  </div>
+</div>
+
+<!-- TAB 1 — CANAL -->
+<div class="panel" id="p1">
+  <div class="sec-title">CSAT % por canal e senioridade <span class="pill">MLB · agosto · n=15</span></div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">CSAT % por canal × senioridade</div>
+      <div class="chart-wrap"><canvas id="ch-canal"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Detalhamento de notas</div>
+      <table class="tbl" style="margin-top:4px">
+        <thead><tr><th>Grupo</th><th>Resp</th><th>😡1</th><th>😕2</th><th>😐3</th><th>🙂4</th><th>😄5</th><th>CSAT%</th></tr></thead>
+        <tbody id="canal-tbl"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="g3" style="margin-top:16px" id="km-cards"></div>
+  <div class="insight amber" style="margin-top:12px">
+    <div class="insight-icon">📡</div>
+    <div class="insight-text"><strong>C2C supera CHAT em 14pp:</strong> 71,4% vs 57,1% entre experts. Verifique se os casos de CHAT têm maior complexidade ou maior tempo de atendimento, pois a insatisfação pode estar ligada à experiência de espera no chat.</div>
+  </div>
+</div>
+
+<!-- TAB 2 — PROCESSO -->
+<div class="panel" id="p2">
+  <div class="sec-title">CSAT % por processo atendido <span class="pill">MLB · agosto · PROCESS_NAME</span></div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">Ranking por processo <span>ordenado por CSAT%</span></div>
+      <div id="proc-bars"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Detalhe por solução <span>drill-down SOLUTION_NAME</span></div>
+      <table class="tbl" id="sol-tbl">
+        <thead><tr><th>Processo</th><th>Solução aplicada</th><th>Resp</th><th>CSAT%</th></tr></thead>
+        <tbody id="sol-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sec-title" style="margin-top:16px">Achados</div>
+  <div class="insight red">
+    <div class="insight-icon">🚨</div>
+    <div class="insight-text"><strong>Reputación é o maior processo e o pior (42,9%):</strong> 7 de 15 casos. 3 das 4 soluções têm CSAT 0% — o único positivo é quando exclui o reclamo. Sellers saem insatisfeitos quando o impacto é mantido ou quando só recebem informação.</div>
+  </div>
+  <div class="insight amber">
+    <div class="insight-icon">⚠</div>
+    <div class="insight-text"><strong>Propiedad Intelectual em 50%:</strong> Split exato — 1 caso resolve (100%) e 1 não resolve (0%). Quando o produto volta via rollback, o seller fica insatisfeito; quando o facode aprova, fica satisfeito.</div>
+  </div>
+  <div class="insight green">
+    <div class="insight-icon">✅</div>
+    <div class="insight-text"><strong>Reputación ME em 75%:</strong> 3 dos 4 casos positivos. O caso negativo foi coleta pendente XD — logística incompleta frustra o seller. Os outros 3 fluxos de ME estão funcionando bem.</div>
+  </div>
+</div>
+
+<!-- TAB 3 — TLs -->
+<div class="panel" id="p3">
+  <div class="sec-title">CSAT % por TL · BR <span class="pill">MLB · agosto · n=15</span></div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">Ranking TLs <span>ordenado por CSAT%</span></div>
+      <div id="tl-bars" style="margin-top:6px"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Detalhamento</div>
+      <table class="tbl">
+        <thead><tr><th>TL</th><th>Resp</th><th>Dets</th><th>CSAT%</th><th>Agentes c/ det</th></tr></thead>
+        <tbody id="tl-tbl"></tbody>
+      </table>
+    </div>
+  </div>
+  <div id="tl-insights" style="margin-top:12px"></div>
+</div>
+
+<!-- TAB 4 — AGENTES -->
+<div class="panel" id="p4">
+  <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+    <div class="sec-title" style="margin:0">CSAT % por agente <span class="pill">MLB · agosto · 12 agentes</span></div>
+    <select id="ag-filter" onchange="renderAgentes()" style="padding:6px 10px;border-radius:6px;border:1px solid #E0DFD7;font-size:12px;font-weight:700;background:#fff">
+      <option value="all">Todos</option>
+      <option value="alerta">Só alertas (≤50%)</option>
+    </select>
+    <span id="ag-count" style="font-size:11px;color:#888780;font-weight:600"></span>
+  </div>
+  <div class="card" style="overflow-x:auto">
+    <table class="tbl">
+      <thead><tr>
+        <th>Agente</th><th>TL</th><th>Status</th><th>Resp</th><th>Score médio</th><th>Detratores</th><th>CSAT%</th>
+      </tr></thead>
+      <tbody id="ag-tbl"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- TAB 5 — INTRADIÁRIO -->
+<div class="panel" id="p5">
+  <div class="sec-title">Intradiário — 3/ago · MLB <span class="pill">dados até 09h</span></div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">CSAT % e detratores hora a hora</div>
+      <div class="chart-wrap sm"><canvas id="ch-intra"></canvas></div>
+      <div class="insight red" style="margin-top:12px">
+        <div class="insight-icon">📉</div>
+        <div class="insight-text"><strong>Pico de detratores às 8h (4 dets em 8 resp = 50%):</strong> O maior volume de respostas às 8h concentrou também o maior volume de detratores. Monitorar turno da manhã com atenção especial.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">CSAT acumulado · 3/ago</div>
+      <div class="chart-wrap sm"><canvas id="ch-intra-acum"></canvas></div>
+      <div class="insight amber" style="margin-top:12px">
+        <div class="insight-icon">📊</div>
+        <div class="insight-text"><strong>CSAT caindo conforme acumula:</strong> 80% às 7h → 62,5% acumulado às 8h → 60% acumulado às 9h. O acumulado do dia está pressionado pelo pico de 8h.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="card-title">Tabela hora a hora</div>
+    <table class="tbl">
+      <thead><tr><th>Hora</th><th>Respondidas</th><th>Detratores</th><th>CSAT%</th></tr></thead>
+      <tbody>
+        <tr><td><strong>07h</strong></td><td>5</td><td style="color:#C84B00;font-weight:700">1</td><td><span style="background:#EAF3DE;color:#173404;padding:3px 10px;border-radius:6px;font-weight:800">80,0%</span></td></tr>
+        <tr><td><strong>08h</strong></td><td>8</td><td style="color:#C84B00;font-weight:700">4</td><td><span style="background:#FAECE7;color:#4A1B0C;padding:3px 10px;border-radius:6px;font-weight:800">50,0%</span></td></tr>
+        <tr><td><strong>09h</strong></td><td>2</td><td style="color:#C84B00;font-weight:700">1</td><td><span style="background:#FAECE7;color:#4A1B0C;padding:3px 10px;border-radius:6px;font-weight:800">50,0%</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="footer">
+  CSAT · Publicações Sellers Mature · MLB (BR_Publicaciones_Sellers_Mature) · Agosto 2026 · Pipeline D-1 + NRT ~30min · Sem target oficial até outubro/2026
+</div>
+
+<!-- ========== RENDER JS ========== -->
+<script>
+document.getElementById('atu-badge').textContent = 'Atualizado: '+ATU;
+
+let chartsInited = {};
+function setTab(i){
+  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('active',i===j));
+  document.querySelectorAll('.panel').forEach((p,j)=>p.classList.toggle('active',i===j));
+  if(!chartsInited[i]){ renderTab(i); chartsInited[i]=true; }
+}
+function renderTab(i){
+  if(i===0) renderVisaoGeral();
+  if(i===1) renderCanal();
+  if(i===2) renderProcesso();
+  if(i===3) renderTLs();
+  if(i===4) renderAgentes();
+  if(i===5) renderIntra();
+}
+Chart.defaults.font.family='system-ui,-apple-system,sans-serif';
+Chart.defaults.font.size=11;
+Chart.defaults.plugins.legend.display=false;
+
+function renderVisaoGeral(){
+  new Chart(document.getElementById('ch-trend'),{
+    type:'bar',
+    data:{
+      labels: DAILY.map(d=>d.dia),
+      datasets:[
+        { label:'Enviadas', data:DAILY.map(d=>d.env), backgroundColor:'#E6F1FB', borderColor:'#378ADD', borderWidth:1, yAxisID:'y2' },
+        { label:'Respondidas', data:DAILY.map(d=>d.res), backgroundColor:'#FAC725', borderColor:'#D4830A', borderWidth:1.5, yAxisID:'y2' },
+        { label:'CSAT%', data:DAILY.map(d=>d.csat), type:'line', borderColor:'#C84B00', backgroundColor:'rgba(200,75,0,.1)',
+          borderWidth:2.5, tension:.3, pointRadius:6, pointBackgroundColor:'#C84B00', yAxisID:'y', spanGaps:true }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:true,position:'top',labels:{boxWidth:10,font:{size:10}}} },
+      scales:{
+        y:{ min:0, max:110, position:'right', ticks:{callback:v=>v+'%'}, grid:{display:false} },
+        y2:{ min:0, ticks:{}, grid:{color:'#F1EFE8'}, title:{display:true,text:'Pesquisas',font:{size:10}} }
+      }
+    }
+  });
+
+  const total=SCORES.reduce((a,b)=>a+b,0);
+  const emojis=['😡','😕','😐','🙂','😄'];
+  const labels5=['Péssimo','Ruim','Neutro','Bom','Ótimo'];
+  const colors=['#F09595','#FAC775','#D3D1C7','#9FE1CB','#5DCAA5'];
+  document.getElementById('score-dist').innerHTML=SCORES.map((n,i)=>{
+    const p=total>0?(n/total*100).toFixed(0):0;
+    return `<div class="score-row">
+      <span class="score-emoji">${emojis[i]}</span>
+      <span class="score-label">${labels5[i]}</span>
+      <div class="score-bar-bg"><div class="score-bar-fill" style="width:${p}%;background:${colors[i]}">${n>0?n:''}</div></div>
+      <span class="score-count">${n}</span>
+      <span class="score-pct">${p}%</span>
+    </div>`;
+  }).join('');
+}
+
+function renderCanal(){
+  new Chart(document.getElementById('ch-canal'),{
+    type:'bar',
+    data:{
+      labels: CANAL.map(c=>c.lbl),
+      datasets:[{ data:CANAL.map(c=>c.csat), backgroundColor:CANAL.map(c=>csatBg(c.csat)), borderColor:CANAL.map(c=>csatColor(c.csat)), borderWidth:2 }]
+    },
+    options:{
+      indexAxis:'y', responsive:true, maintainAspectRatio:false,
+      scales:{ x:{min:0,max:110,ticks:{callback:v=>v+'%'},grid:{color:'#F1EFE8'}}, y:{ticks:{font:{size:11,weight:'bold'}}} }
+    }
+  });
+  document.getElementById('canal-tbl').innerHTML=CANAL.map(c=>`<tr>
+    <td style="font-weight:700">${c.lbl}</td><td>${c.res}</td>
+    <td style="color:#C84B00;font-weight:700">${c.n[0]}</td>
+    <td style="color:#D4830A;font-weight:700">${c.n[1]}</td>
+    <td style="color:#888780;font-weight:700">${c.n[2]}</td>
+    <td style="color:#1D9E75;font-weight:700">${c.n[3]}</td>
+    <td style="color:#0F6E56;font-weight:900">${c.n[4]}</td>
+    <td style="font-weight:900;color:${csatColor(c.csat)}">${pct(c.csat)}</td>
+  </tr>`).join('');
+
+  const exp=AGENTES.filter(a=>a.km==='EXPERT'), nwb=AGENTES.filter(a=>a.km==='NEWBIE');
+  const km=(arr)=>{
+    const t=arr.reduce((s,a)=>s+a.res,0);
+    const s=arr.reduce((sum,a)=>sum+Math.round(a.csat/100*a.res),0);
+    return t>0?(s/t*100).toFixed(1):null;
+  };
+  const ek=km(exp), nk=km(nwb);
+  document.getElementById('km-cards').innerHTML=`
+    <div class="card"><div class="card-title">EXPERT</div>
+      <div style="font-size:32px;font-weight:900;color:${csatColor(+ek||0)}">${pct(+ek)}</div>
+      <div style="font-size:12px;color:#5F5E5A;margin-top:4px">${exp.reduce((s,a)=>s+a.res,0)} resp · ${exp.length} agentes</div>
+    </div>
+    <div class="card"><div class="card-title">NEWBIE</div>
+      <div style="font-size:32px;font-weight:900;color:${csatColor(+nk||0)}">${pct(+nk)}</div>
+      <div style="font-size:12px;color:#5F5E5A;margin-top:4px">${nwb.reduce((s,a)=>s+a.res,0)} resp · ${nwb.length} agente</div>
+    </div>
+    <div class="card"><div class="card-title">GAP Expert − Newbie</div>
+      <div style="font-size:28px;font-weight:900;color:#185FA5">${(+ek-(+nk||0)).toFixed(1)}pp</div>
+      <div style="font-size:12px;color:#5F5E5A;margin-top:4px">Diferença significativa — monitorar</div>
+    </div>`;
+}
+
+function renderProcesso(){
+  const sorted=[...PROCESSO].sort((a,b)=>a.csat-b.csat);
+  document.getElementById('proc-bars').innerHTML=sorted.map(p=>{
+    const c=csatColor(p.csat);
+    return `<div style="margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
+        <span style="font-weight:700">${p.proc}</span>
+        <span style="color:#888780;font-size:11px">${p.res} resp</span>
+      </div>
+      <div class="csat-bar-wrap">
+        <div class="csat-bar-bg"><div class="csat-bar-fill" style="width:${p.csat}%;background:${c}"></div></div>
+        <span class="csat-val" style="color:${c}">${pct(p.csat)}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('sol-tbody').innerHTML=SOLUCOES.map(s=>{
+    const c=csatColor(s.csat), bg=csatBg(s.csat), txt=csatTxt(s.csat);
+    return `<tr>
+      <td style="font-size:11px;color:#5F5E5A;font-weight:600">${s.proc}</td>
+      <td style="font-size:12px">${s.sol}</td>
+      <td>${s.res}</td>
+      <td><span style="background:${bg};color:${txt};padding:2px 8px;border-radius:5px;font-weight:800;font-size:11px">${pct(s.csat)}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderTLs(){
+  const sorted=[...TLS].sort((a,b)=>a.csat-b.csat);
+  document.getElementById('tl-bars').innerHTML=sorted.map(t=>{
+    const c=csatColor(t.csat);
+    return `<div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;align-items:center">
+        <span style="font-weight:700">${t.nome}</span>
+        <span style="color:#888780;font-size:11px">${t.res} resp · ${t.dets} det</span>
+      </div>
+      <div class="csat-bar-wrap">
+        <div class="csat-bar-bg"><div class="csat-bar-fill" style="width:${t.csat}%;background:${c}"></div></div>
+        <span class="csat-val" style="color:${c}">${pct(t.csat)}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('tl-tbl').innerHTML=sorted.map(t=>{
+    const c=csatColor(t.csat), bg=csatBg(t.csat), txt=csatTxt(t.csat);
+    const agsDet=AGENTES.filter(a=>a.tl===t.tl&&a.dets>0).map(a=>a.ldap).join(', ')||'—';
+    return `<tr>
+      <td style="font-weight:700">${t.nome}</td>
+      <td>${t.res}</td>
+      <td style="color:#C84B00;font-weight:700">${t.dets}</td>
+      <td><span style="background:${bg};color:${txt};padding:3px 10px;border-radius:6px;font-weight:800;font-size:12px">${pct(t.csat)}</span></td>
+      <td style="font-size:11px;color:#5F5E5A">${agsDet}</td>
+    </tr>`;
+  }).join('');
+
+  const crit=TLS.filter(t=>t.csat<75).sort((a,b)=>a.csat-b.csat);
+  document.getElementById('tl-insights').innerHTML=crit.map(t=>{
+    const lvl=t.csat<50?'red':'amber';
+    const ags=AGENTES.filter(a=>a.tl===t.tl&&a.dets>0).map(a=>a.ldap).join(', ')||'—';
+    return `<div class="insight ${lvl}">
+      <div class="insight-icon">${t.csat<50?'🚨':'⚠'}</div>
+      <div class="insight-text"><strong>${t.nome} — ${pct(t.csat)} (${t.res} resp, ${t.dets} det):</strong> Agentes com detrator: ${ags}. Amostra pequena — acompanhar nos próximos dias.</div>
+    </div>`;
+  }).join('');
+}
+
+function renderAgentes(){
+  const fv=document.getElementById('ag-filter').value;
+  let arr=[...AGENTES].sort((a,b)=>a.csat-b.csat);
+  if(fv==='alerta') arr=arr.filter(a=>a.csat<=50);
+  document.getElementById('ag-count').textContent=arr.length+' agentes';
+  document.getElementById('ag-tbl').innerHTML=arr.map(a=>{
+    const c=csatColor(a.csat), bg=csatBg(a.csat), txt=csatTxt(a.csat);
+    const alert=a.csat<=50?'<span class="tag alerta" style="margin-left:4px">Atenção</span>':'';
+    return `<tr>
+      <td style="font-weight:700">${a.ldap}${alert}</td>
+      <td style="font-size:12px;color:#5F5E5A">${a.tl}</td>
+      <td><span class="tag ${a.km.toLowerCase()}">${a.km}</span></td>
+      <td>${a.res}</td>
+      <td style="font-weight:700">${a.sc.toFixed(1)}</td>
+      <td style="color:#C84B00;font-weight:700">${a.dets||'—'}</td>
+      <td><span style="background:${bg};color:${txt};padding:3px 10px;border-radius:6px;font-weight:800;font-size:12px">${pct(a.csat)}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderIntra(){
+  new Chart(document.getElementById('ch-intra'),{
+    type:'bar',
+    data:{
+      labels:INTRA_TODAY.map(d=>d.h),
+      datasets:[
+        { label:'CSAT%', data:INTRA_TODAY.map(d=>d.csat), backgroundColor:INTRA_TODAY.map(d=>csatBg(d.csat)), borderColor:INTRA_TODAY.map(d=>csatColor(d.csat)), borderWidth:2, yAxisID:'y' },
+        { label:'Detratores', data:INTRA_TODAY.map(d=>d.det), type:'line', borderColor:'#C84B00', backgroundColor:'rgba(200,75,0,.1)', borderWidth:2, pointRadius:5, tension:.3, yAxisID:'y2' }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:true,position:'top',labels:{boxWidth:10,font:{size:10}}} },
+      scales:{
+        y:{min:0,max:110,ticks:{callback:v=>v+'%'},grid:{color:'#F1EFE8'}},
+        y2:{min:0,max:6,position:'right',ticks:{stepSize:1},grid:{display:false}}
+      }
+    }
+  });
+
+  let as=0, at=0;
+  const acc=INTRA_TODAY.map(d=>{
+    as+=Math.round(d.csat/100*d.res); at+=d.res;
+    return at>0?+(as/at*100).toFixed(1):null;
+  });
+  new Chart(document.getElementById('ch-intra-acum'),{
+    type:'line',
+    data:{
+      labels:INTRA_TODAY.map(d=>d.h),
+      datasets:[{ label:'CSAT acumulado%', data:acc, borderColor:'#FAC725', backgroundColor:'rgba(250,199,37,.2)', borderWidth:3, tension:.3, pointRadius:6, pointBackgroundColor:'#FAC725', fill:true }]
+    },
+    options:{ responsive:true, maintainAspectRatio:false, scales:{ y:{min:0,max:100,ticks:{callback:v=>v+'%'},grid:{color:'#F1EFE8'}} } }
+  });
+}
+
+chartsInited[0]=true;
+renderVisaoGeral();
+</script>
+</body>
+</html>
