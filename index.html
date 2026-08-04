@@ -78,7 +78,7 @@ canvas{display:block}
 
 <!-- ========== DADOS ========== -->
 <script>
-const ATU = '4 Ago 2026 · 07h45 · MLB apenas';
+const ATU = '4 Ago 2026 · 07h51 · MLB apenas';
 
 const DAILY = [
   { dia:'01/Ago', env:4, res:0, csat:null, taxa:0.0 },
@@ -405,9 +405,10 @@ function csatTxt(v){   return v>=80?'#173404':v>=60?'#633806':'#4A1B0C' }
     <div class="sub">MLB apenas · BR_Publicaciones_Sellers_Mature · Agosto 2026</div>
   </div>
   <div class="header-right">
-    <div class="badge pulse-wrap"><span class="pulse"></span>NRT ~30min</div>
+    <div class="badge pulse-wrap"><span class="pulse"></span>NRT ~10min</div>
     <div class="badge warn">⚠ Sem target até out/2026</div>
     <div class="badge" id="refresh-countdown" style="background:#26215C;color:#9FE1CB;min-width:80px;text-align:center">↻ —</div>
+    <button id="btn-update" onclick="triggerUpdate()" style="padding:5px 14px;border-radius:99px;font-size:12px;font-weight:800;background:#412402;color:#FAC725;border:none;cursor:pointer;transition:opacity .2s">🔄 Atualizar</button>
     <div class="badge" id="atu-badge"></div>
   </div>
 </div>
@@ -1144,6 +1145,39 @@ document.querySelectorAll('.panel').forEach(p => p.style.display = '');
 // Restaurar aba da sessão anterior
 const _savedTab = parseInt(sessionStorage.getItem('csat_tab') || '0');
 setTab(_savedTab);
+
+// Botão Atualizar — dispara update.py via servidor local
+async function triggerUpdate(){
+  const btn = document.getElementById('btn-update');
+  btn.disabled = true;
+  btn.textContent = '⏳ Atualizando...';
+  btn.style.opacity = '0.6';
+  try {
+    const r = await fetch('http://localhost:5050/update', {method:'POST'});
+    const j = await r.json();
+    if(j.status === 'already_running'){
+      btn.textContent = '⏳ Já rodando...';
+    } else {
+      btn.textContent = '✅ Aguardando dados...';
+      // Recarrega após 2min (tempo médio do script)
+      let secs = 120;
+      const iv = setInterval(()=>{
+        secs--;
+        btn.textContent = `✅ Recarregando em ${secs}s`;
+        if(secs <= 0){ clearInterval(iv); location.reload(); }
+      }, 1000);
+    }
+  } catch(e) {
+    btn.textContent = '⚠ Servidor offline';
+    btn.style.background = '#C84B00';
+    setTimeout(()=>{
+      btn.textContent = '🔄 Atualizar';
+      btn.style.background = '#412402';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+    }, 4000);
+  }
+}
 
 // Countdown + auto-reload a cada 10min
 const _reloadAt = Date.now() + 10*60*1000;
