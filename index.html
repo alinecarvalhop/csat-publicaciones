@@ -1307,8 +1307,8 @@ async function triggerUpdate(){
   }
 }
 
-// Countdown + auto-reload a cada 2min (alinhado com Task Scheduler)
-const _reloadAt = Date.now() + 2*60*1000;
+// Countdown + auto-reload a cada 30min (alinhado com Task Scheduler)
+const _reloadAt = Date.now() + 30*60*1000;
 setInterval(()=>{
   const rem = _reloadAt - Date.now();
   if(rem <= 0){ location.reload(); return; }
